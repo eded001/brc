@@ -1,0 +1,28 @@
+{
+  "extends": "@react-native/typescript-config",
+  "compilerOptions": {
+    "types": [
+      "jest"
+    ],
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ],
+    }
+  },
+  "include": [
+    "**/*.js",
+    "**/*.ts",
+    "**/*.tsx",
+    "./nativewind-env.d.ts",
+    "./src",
+    "./global.css",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "Pods"
+  ]
+}
