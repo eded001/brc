@@ -1,7 +1,7 @@
 // Auth.tsx
 import React, { useState } from "react";
 import { Alert, View, Text, TextInput, Pressable } from "react-native";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/services/supabase";
 
 export default function Auth() {
     const [email, setEmail] = useState("");
