@@ -9,6 +9,8 @@ import { Profile } from "@screens/profile";
 import { Debug } from "@screens/debug";
 import { Search as SearchScreen } from "@screens/search";
 
+// components
+import { Header, HeaderAction } from "@navigation/components/Header";
 
 const Tab = createBottomTabNavigator();
 export default function AppTabs() {
@@ -42,33 +44,56 @@ export default function AppTabs() {
     ];
 
     return (
-        <Tab.Navigator screenOptions={({ route }) => ({
-            headerShown: false,
-            tabBarHideOnKeyboard: true,
-            tabBarActiveTintColor: "#A7F3D0",
-            tabBarInactiveTintColor: "#C1D9A7",
-            tabBarStyle: {
-                backgroundColor: "#044024",
-                height: 60 + insets.bottom,
-                paddingTop: 5,
-                paddingBottom: insets.bottom,
-                borderTopWidth: 0,
-                // eslint-disable-next-line react/no-unstable-nested-components
-            }, tabBarIcon: ({ color, size, focused }) => {
+        <Tab.Navigator
+            screenOptions={({ route }) => {
                 const tab = tabs.find(t => t.name === route.name);
-                if (!tab) return null;
-                const Icon = tab.icon;
-                return (<Icon color={color} size={size} fill={focused ? "#72B63B75" : "none"} />);
-            },
-        })}>
-            {
-                tabs.map(tab => (
-                    <Tab.Screen
-                        key={tab.name}
-                        name={tab.name}
-                        component={tab.component}
-                        options={{ title: tab.title }} />)
-                )}
+                return {
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    header: () => (
+                        <Header
+                            title={tab?.title || ""}
+                            action={
+                                tab?.name === "Explore" ? (
+                                    <HeaderAction
+                                        screen="Settings"
+                                        icon={Settings}
+                                        size={24}
+                                        color="#A7F3D0"
+                                    />
+                                ) : null
+                            }
+                        />
+                    ),
+                    tabBarHideOnKeyboard: true,
+                    tabBarActiveTintColor: "#A7F3D0",
+                    tabBarInactiveTintColor: "#C1D9A7",
+                    tabBarStyle: {
+                        backgroundColor: "#044024",
+                        height: 60 + insets.bottom,
+                        paddingTop: 5,
+                        paddingBottom: insets.bottom,
+                        borderTopWidth: 0,
+                    },
+                    headerShown: true,
+                    // eslint-disable-next-line react/no-unstable-nested-components
+                    tabBarIcon: ({ color, size, focused }) => {
+                        if (!tab) return null;
+                        const Icon = tab.icon;
+                        return (
+                            <Icon color={color} size={size} fill={focused ? "#72B63B75" : "none"} />
+                        );
+                    }
+                };
+            }}
+        >
+            {tabs.map(tab => (
+                <Tab.Screen
+                    key={tab.name}
+                    name={tab.name}
+                    component={tab.component}
+                    options={{ title: tab.title }}
+                />
+            ))}
         </Tab.Navigator>
     );
 }
