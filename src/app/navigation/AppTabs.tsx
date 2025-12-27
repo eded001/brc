@@ -1,36 +1,44 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CircleUserRound, Bug, Compass } from "lucide-react-native";
+import { CircleUserRound, Bug, Compass, Search as SearchIcon, Settings } from "lucide-react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 // screens
 import { Explore } from "@screens/explore";
 import { Profile } from "@screens/profile";
 import { Debug } from "@screens/debug";
+import { Search as SearchScreen } from "@screens/search";
+
 
 const Tab = createBottomTabNavigator();
 export default function AppTabs() {
     const insets = useSafeAreaInsets();
     const isDebug = __DEV__;
-    const tabs = [{
-        name: "Explore",
-        component: Explore,
-        icon: Compass,
-        title: "Explorar"
-    },
-    {
-        name: "Profile",
-        component: Profile,
-        icon: CircleUserRound,
-        title: "Perfil",
-        avatar: null
-    },
-    ...(isDebug ? [{
-        name: "Debug",
-        component: Debug,
-        icon: Bug,
-        title: "Depuração (Debug)"
-    }] : []),
+    const tabs = [
+        {
+            name: "Explore",
+            component: Explore,
+            icon: Compass,
+            title: "Explorar"
+        },
+        {
+            name: "Search",
+            component: SearchScreen,
+            icon: SearchIcon,
+            title: "Procurar"
+        },
+        {
+            name: "Profile",
+            component: Profile,
+            icon: CircleUserRound,
+            title: "Perfil"
+        },
+        ...(isDebug ? [{
+            name: "Debug",
+            component: Debug,
+            icon: Bug,
+            title: "Depuração (Debug)"
+        }] : []),
     ];
 
     return (
