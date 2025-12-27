@@ -4,6 +4,7 @@ import AppTabs from "./AppTabs";
 import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
 
+// navigation
 const Stack = createNativeStackNavigator();
 
 export default function RootStack() {
