@@ -13,7 +13,7 @@ export default function Test() {
             <Text className="text-green-500 text-3xl font-bold mb-8">Test Hub</Text>
 
             <TouchableOpacity
-                onPress={() => navigation.navigate('Explore')}
+                onPress={() => navigation.navigate('Settings')}
                 className="w-full bg-green-600 py-4 rounded-xl mb-4"
                 activeOpacity={0.8}
             >
