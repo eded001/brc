@@ -1,1 +1,1 @@
-export { default as Test } from "./screens/Search";
+export { default as Search } from "./screens/Search";
