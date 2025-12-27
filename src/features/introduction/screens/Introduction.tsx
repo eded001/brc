@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import Onboarding, { Slide } from "@/features/onboarding/components/Onboarding";
+import Onboarding, { Slide } from "../components/Onboarding";
 
 const SLIDES: Slide[] = [
     { id: "1", title: "Bem-vindo", description: "Organize suas ideias e avance com foco." },
