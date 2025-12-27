@@ -1,4 +1,4 @@
-package com.brc
+package com.amazonext.brc
 
 import android.app.Application
 import com.facebook.react.PackageList
