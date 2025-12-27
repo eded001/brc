@@ -3,17 +3,10 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type RootStackParamList = {
-    Explore: undefined;
-    Profile: undefined;
-    Settings: undefined;
-    Onboarding: undefined;
-};
-
-type TestScreenProp = NativeStackNavigationProp<RootStackParamList>;
+import { RootStackProps } from '@navigation/types/rootStack';
 
 export default function Test() {
-    const navigation = useNavigation<TestScreenProp>();
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackProps>>();
 
     return (
         <View className="flex-1 bg-black items-center justify-center px-6">
