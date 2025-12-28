@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CircleUserRound, Bug, Compass, Search as SearchIcon, Settings } from "lucide-react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 // screens
 import { Explore } from "@screens/explore";
@@ -11,45 +12,29 @@ import { Search as SearchScreen } from "@screens/search";
 
 // components
 import { Header, HeaderAction } from "@navigation/components/Header";
-import { View } from "react-native";
+
+// colors
+import { Colors } from "@/constants/colors";
 
 const Tab = createBottomTabNavigator();
+
 export default function AppTabs() {
     const insets = useSafeAreaInsets();
     const isDebug = __DEV__;
+
     const tabs = [
-        {
-            name: "Explore",
-            component: Explore,
-            icon: Compass,
-            title: "Explorar"
-        },
-        {
-            name: "Search",
-            component: SearchScreen,
-            icon: SearchIcon,
-            title: "Procurar"
-        },
-        {
-            name: "Profile",
-            component: Profile,
-            icon: CircleUserRound,
-            title: "Perfil"
-        },
-        ...(isDebug ? [{
-            name: "Debug",
-            component: Debug,
-            icon: Bug,
-            title: "Depuração (Debug)"
-        }] : []),
+        { name: "Explore", component: Explore, icon: Compass, title: "Explorar" },
+        { name: "Search", component: SearchScreen, icon: SearchIcon, title: "Procurar" },
+        { name: "Profile", component: Profile, icon: CircleUserRound, title: "Perfil" },
+        ...(isDebug ? [{ name: "Debug", component: Debug, icon: Bug, title: "Depuração (Debug)" }] : []),
     ];
 
     return (
         <Tab.Navigator
             screenOptions={({ route }) => {
                 const tab = tabs.find(t => t.name === route.name);
+
                 return {
-                    // eslint-disable-next-line react/no-unstable-nested-components
                     header: () => (
                         <Header
                             title={tab?.title || ""}
@@ -59,17 +44,17 @@ export default function AppTabs() {
                                         screen="Settings"
                                         icon={Settings}
                                         size={24}
-                                        color="#A7F3D0"
+                                        color={colors.primary}
                                     />
                                 ) : null
                             }
                         />
                     ),
                     tabBarHideOnKeyboard: true,
-                    tabBarActiveTintColor: "#A7F3D0",
-                    tabBarInactiveTintColor: "#C1D9A7",
+                    tabBarActiveTintColor: colors.primary,
+                    tabBarInactiveTintColor: colors.borderGray,
                     tabBarStyle: {
-                        backgroundColor: "#044024",
+                        backgroundColor: colors.background,
                         height: 60 + insets.bottom,
                         paddingTop: 5,
                         paddingBottom: insets.bottom,
@@ -79,19 +64,19 @@ export default function AppTabs() {
                     tabBarLabelStyle: {
                         fontWeight: "700",
                     },
-                    // eslint-disable-next-line react/no-unstable-nested-components
                     tabBarIcon: ({ color, size, focused }) => {
                         if (!tab) return null;
                         const Icon = tab.icon;
 
                         return (
                             <View
-                                className={`p-[4px] mb-1 rounded-xl ${focused ? "bg-emerald-800" : "bg-transparent"}`}
+                                className={`p-1 mb-1 rounded-xl ${focused ? "bg-[#03382D]" : "bg-transparent"}`}
+                                style={{ backgroundColor: focused ? colors.backButtonActive : "transparent" }}
                             >
                                 <Icon
                                     color={color}
                                     size={size}
-                                    fill={focused ? "#72B63B75" : "none"}
+                                    fill={focused ? `${colors.primary}75` : "none"}
                                 />
                             </View>
                         );
@@ -104,9 +89,7 @@ export default function AppTabs() {
                     key={tab.name}
                     name={tab.name}
                     component={tab.component}
-                    options={{
-                        title: tab.title,
-                    }}
+                    options={{ title: tab.title }}
                 />
             ))}
         </Tab.Navigator>

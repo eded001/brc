@@ -4,15 +4,23 @@ import { View, Text } from "react-native";
 // types
 import { HeaderProps } from "@navigation/types/header";
 
+// constants
+import { Colors } from "@/constants/colors";
+
 export default function Header({ title, action }: HeaderProps) {
     return (
-        <View className="bg-[#044024] border-b-0 px-6 pt-10 pb-4 flex-row items-center justify-between">
-
+        <View className={`flex-row items-center justify-between px-6 pt-10 pb-4`} style={{ backgroundColor: colors.background }}>
             <View className="flex-row items-center gap-2">
-                <Text className="text-2xl text-[#A7F3D0] bg-[#032b18] p-2 rounded-lg">
+                <Text
+                    className="text-2xl p-2 rounded-lg"
+                    style={{ color: colors.primary, backgroundColor: colors.cardBackground }}
+                >
                     BRC
                 </Text>
-                <Text className="text-xl font-bold text-[#A7F3D0]">
+                <Text
+                    className="text-xl font-bold"
+                    style={{ color: colors.primary }}
+                >
                     {title}
                 </Text>
             </View>
