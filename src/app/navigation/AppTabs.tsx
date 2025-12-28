@@ -11,6 +11,7 @@ import { Search as SearchScreen } from "@screens/search";
 
 // components
 import { Header, HeaderAction } from "@navigation/components/Header";
+import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 export default function AppTabs() {
@@ -75,14 +76,26 @@ export default function AppTabs() {
                         borderTopWidth: 0,
                     },
                     headerShown: true,
+                    tabBarLabelStyle: {
+                        fontWeight: "700",
+                    },
                     // eslint-disable-next-line react/no-unstable-nested-components
                     tabBarIcon: ({ color, size, focused }) => {
                         if (!tab) return null;
                         const Icon = tab.icon;
+
                         return (
-                            <Icon color={color} size={size} fill={focused ? "#72B63B75" : "none"} />
+                            <View
+                                className={`p-[4px] mb-1 rounded-xl ${focused ? "bg-emerald-800" : "bg-transparent"}`}
+                            >
+                                <Icon
+                                    color={color}
+                                    size={size}
+                                    fill={focused ? "#72B63B75" : "none"}
+                                />
+                            </View>
                         );
-                    }
+                    },
                 };
             }}
         >
@@ -91,7 +104,9 @@ export default function AppTabs() {
                     key={tab.name}
                     name={tab.name}
                     component={tab.component}
-                    options={{ title: tab.title }}
+                    options={{
+                        title: tab.title,
+                    }}
                 />
             ))}
         </Tab.Navigator>
