@@ -1,39 +1,52 @@
 import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import AppTabs from "./AppTabs";
+
+// screens
 import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
+import Register from "@test/Register";
 
 // navigation
 const Stack = createNativeStackNavigator();
+import AppTabs from "./AppTabs";
 
 export default function RootStack() {
     const [hasSeenIntroduction, setHasSeenIntroduction] = useState(false);
 
     return (
         <Stack.Navigator>
-            {!hasSeenIntroduction ? (
+            {!hasSeenIntroduction && (
                 <Stack.Screen
                     name="Introduction"
                     options={{ headerShown: false }}
                 >
-                    {() => (
+                    {({ navigation }) => (
                         <Introduction
-                            onFinish={() => setHasSeenIntroduction(true)}
+                            onFinish={() => {
+                                setHasSeenIntroduction(true);
+                                navigation.replace("Register");
+                            }}
                         />
                     )}
                 </Stack.Screen>
-            ) : (
-                <Stack.Screen
-                    name="AppTabs"
-                    component={AppTabs}
-                    options={{ headerShown: false }}
-                />
             )}
+
+            <Stack.Screen
+                name="Register"
+                component={Register}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="AppTabs"
+                component={AppTabs}
+                options={{ headerShown: false }}
+            />
 
             <Stack.Screen
                 name="Settings"
                 component={Settings}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );
