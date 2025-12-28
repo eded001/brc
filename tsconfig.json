@@ -16,6 +16,9 @@
       "@navigation/*": [
         "src/app/navigation/*"
       ],
+      "@test/*": [
+        "src/features/debug/test/*"
+      ],
     }
   },
   "include": [
