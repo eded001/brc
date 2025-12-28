@@ -1,18 +1,20 @@
 import React from "react";
 import { View } from "react-native";
-import Onboarding, { Slide } from "../components/Onboarding";
 
-const SLIDES: Slide[] = [
+// components
+import { Onboarding } from "@/components/onboarding";
+
+// types
+import { GoToScreenProps } from "@/constants/types/goToScreen";
+import { SlidesProps } from "@/components/onboarding/types/slides";
+
+const SLIDES: SlidesProps[] = [
     { id: "1", title: "Bem-vindo", description: "Organize suas ideias e avance com foco." },
     { id: "2", title: "Produtividade", description: "Fluxos simples, execução eficiente." },
     { id: "3", title: "Tudo pronto", description: "Vamos começar sua jornada." },
 ];
 
-interface OnboardingScreenProps {
-    onFinish: () => void;
-}
-
-export default function OnboardingScreen({ onFinish }: OnboardingScreenProps) {
+export default function Introduction({ onFinish }: GoToScreenProps) {
     return (
         <View className="flex-1 bg-green-50">
             <Onboarding
@@ -21,6 +23,8 @@ export default function OnboardingScreen({ onFinish }: OnboardingScreenProps) {
                 activeDotColor="#16A34A"
                 inactiveDotColor="#A7F3D0"
                 buttonText="Vamos lá"
+                controlledByButton={true}
+                allowSwipe={true}
             />
         </View>
     );
