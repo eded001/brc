@@ -48,6 +48,16 @@ export default function Onboarding({
         }
     };
 
+    const handleBack = () => {
+        if (index > 0) {
+            listRef.current?.scrollToIndex({
+                index: index - 1,
+                animated: true,
+            });
+            setIndex(index - 1);
+        }
+    };
+
     return (
         <View className="flex-1" style={containerStyle}>
             <FlatList
@@ -79,33 +89,40 @@ export default function Onboarding({
             />
 
             <View className="pb-10 items-center">
+                {/* Pontinhos */}
                 <View className="flex-row mb-5">
                     {slides.map((_, i) => (
                         <View
                             key={i}
                             style={{
-                                backgroundColor:
-                                    i === index ? activeDotColor : inactiveDotColor,
+                                backgroundColor: i === index ? activeDotColor : inactiveDotColor,
                             }}
                             className="h-2 w-2 mx-1 rounded-full"
                         />
                     ))}
                 </View>
 
-                {controlledByButton && index === slides.length - 1 && (
+                <View className="flex-row justify-between w-full px-10 mb-5">
+                    {index > 0 ? (
+                        <TouchableOpacity
+                            onPress={handleBack}
+                            className="px-6 py-3 rounded-md bg-green-800"
+                        >
+                            <Text className="text-green-200 font-semibold">Voltar</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <View className="px-6 py-3" /> // espaço vazio
+                    )}
+
                     <TouchableOpacity
                         onPress={handleNext}
-                        style={buttonStyle}
-                        className="px-8 py-3 rounded-md bg-green-900"
+                        className="px-6 py-3 rounded-md bg-green-900"
                     >
-                        <Text
-                            style={buttonTextStyle}
-                            className="text-white font-semibold text-base"
-                        >
-                            {buttonText}
+                        <Text className="text-green-100 font-semibold">
+                            {index === slides.length - 1 ? buttonText : "Próximo"}
                         </Text>
                     </TouchableOpacity>
-                )}
+                </View>
             </View>
         </View>
     );
