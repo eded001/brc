@@ -5,7 +5,7 @@ import { View } from "react-native";
 import { Onboarding } from "@/components/onboarding";
 
 // types
-import { GoToScreenProps } from "@/constants/types/goToScreen";
+import { GoToScreenProps } from "@/types/goToScreen";
 import { SlidesProps } from "@/components/onboarding/types/slides";
 
 const SLIDES: SlidesProps[] = [
