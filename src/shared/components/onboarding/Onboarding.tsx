@@ -1,21 +1,16 @@
 import React, { useRef, useState } from "react";
 import { View, Text, FlatList, Dimensions, TouchableOpacity, StyleProp, ViewStyle, TextStyle, } from "react-native";
+import { SlideProps } from "./types/slides";
 
 const { width } = Dimensions.get("window");
 
-export interface Slide {
-    id: string;
-    title: string;
-    description: string;
-}
-
 interface OnboardingProps {
-    slides: Slide[];
+    slides: SlideProps[];
     onFinish: () => void;
 
     /* Controle de navegação */
-    controlledByButton?: boolean; // avança por botão
-    allowSwipe?: boolean; // permite swipe tradicional
+    controlledByButton?: boolean;
+    allowSwipe?: boolean;
 
     /* Estilos customizáveis */
     containerStyle?: StyleProp<ViewStyle>;
