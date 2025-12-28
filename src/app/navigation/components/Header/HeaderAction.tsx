@@ -1,7 +1,7 @@
 import React from "react";
 
 // components
-import GoToScreen from "@/components/GoToScreen";
+import { GoToScreen } from "@/components/goToScreen";
 
 // types
 import { HeaderActionProps } from "@navigation/types/header";
