@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { View, Text, FlatList, Dimensions, TouchableOpacity, StyleProp, ViewStyle, TextStyle, } from "react-native";
-import { SlideProps } from "./types/slides";
+import { SlidesProps } from "./types/slides";
 
 const { width } = Dimensions.get("window");
 
 interface OnboardingProps {
-    slides: SlideProps[];
+    slides: SlidesProps[];
     onFinish: () => void;
 
     /* Controle de navegação */
