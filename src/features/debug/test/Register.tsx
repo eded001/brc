@@ -1,9 +1,35 @@
 import React, { useRef, useState } from "react";
-import { View, Text, TextInput, FlatList, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, TextInput, FlatList, TouchableOpacity, Dimensions, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { User, Mail, Lock } from "lucide-react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
+
+const TAGS_INTERESTS = [
+    "Tecnologia", "Música", "Esportes", "Arte",
+    "Games", "Inteligência Artificial", "Machine Learning", "Data Science",
+    "Blockchain", "Criptomoedas", "IoT", "Realidade Virtual",
+    "Realidade Aumentada", "Cibersegurança", "DevOps",
+    "Cloud Computing", "Mobile", "Web", "Robótica",
+    "Automação", "Fintech", "Startups"
+];
+
+const TAGS_SKILLS = [
+    "JavaScript", "TypeScript", "React", "React Native",
+    "Next.js", "Node.js", "Express", "NestJS",
+    "Python", "Django", "Flask", "Java",
+    "Spring Boot", "Kotlin", "Swift", "Objective-C",
+    "C#", ".NET", "Go", "Rust",
+    "C++", "C", "PHP", "Laravel",
+    "Ruby", "Rails", "SQL", "PostgreSQL",
+    "MySQL", "MongoDB", "GraphQL", "REST",
+    "Docker", "Kubernetes", "AWS", "Azure",
+    "GCP", "Firebase", "Tailwind CSS", "Sass",
+    "Bootstrap", "UI/UX Design", "Testing", "Jest",
+    "Cypress", "Automation", "CI/CD", "Microservices",
+    "Event-Driven Architecture", "Serverless", "WebAssembly"
+];
 
 export default function RegisterSlides() {
     const navigation = useNavigation<any>();
@@ -16,6 +42,22 @@ export default function RegisterSlides() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState<Record<string, string>>({});
+
+    // Tags
+    const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+    const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+    const toggleInterest = (tag: string) => {
+        setSelectedInterests(prev =>
+            prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+        );
+    };
+
+    const toggleSkill = (tag: string) => {
+        setSelectedSkills(prev =>
+            prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+        );
+    };
 
     // Validação
     const validateSlide = (): boolean => {
@@ -39,22 +81,21 @@ export default function RegisterSlides() {
             listRef.current?.scrollToIndex({ index: index + 1, animated: true });
             setIndex(index + 1);
         } else {
-            // Último slide: navega para AppTabs
             navigation.replace("AppTabs");
         }
     };
 
     const slides = [
         {
-            id: "1",
+            id: 1,
             render: () => (
-                <View style={{ width, padding: 20, flex: 1, justifyContent: "center" }}>
-                    <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>Dados Pessoais</Text>
+                <SafeAreaView className="w-full px-5 mt-10 flex-1 justify-start">
+                    <Text className="text-white text-2xl font-bold">Dados Pessoais</Text>
 
-                    <Text style={{ color: "white", marginTop: 20 }}>Nome completo</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#0F2923", borderRadius: 12, padding: 10, marginTop: 5 }}>
+                    <Text className="text-white mt-5">Nome completo</Text>
+                    <View className="flex-row items-center bg-[#0F2923] rounded-xl p-3 mt-1">
                         <TextInput
-                            style={{ flex: 1, color: "white" }}
+                            className="flex-1 text-white"
                             placeholder="Digite seu nome completo"
                             placeholderTextColor="#7F8F85"
                             value={fullName}
@@ -62,12 +103,12 @@ export default function RegisterSlides() {
                         />
                         <User size={20} color="#00E887" />
                     </View>
-                    {errors.fullName && <Text style={{ color: "red" }}>{errors.fullName}</Text>}
+                    {errors.fullName && <Text className="text-red-500">{errors.fullName}</Text>}
 
-                    <Text style={{ color: "white", marginTop: 20 }}>Apelido</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#0F2923", borderRadius: 12, padding: 10, marginTop: 5 }}>
+                    <Text className="text-white mt-5">Apelido</Text>
+                    <View className="flex-row items-center bg-[#0F2923] rounded-xl p-3 mt-1">
                         <TextInput
-                            style={{ flex: 1, color: "white" }}
+                            className="flex-1 text-white"
                             placeholder="Ex: joao_dev"
                             placeholderTextColor="#7F8F85"
                             value={nickname}
@@ -75,20 +116,20 @@ export default function RegisterSlides() {
                         />
                         <User size={20} color="#00E887" />
                     </View>
-                    {errors.nickname && <Text style={{ color: "red" }}>{errors.nickname}</Text>}
-                </View>
+                    {errors.nickname && <Text className="text-red-500">{errors.nickname}</Text>}
+                </SafeAreaView>
             ),
         },
         {
-            id: "2",
+            id: 2,
             render: () => (
-                <View style={{ width, padding: 20, flex: 1, justifyContent: "center" }}>
-                    <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>Login</Text>
+                <SafeAreaView className="w-full px-5 my-10 flex-1 justify-start">
+                    <Text className="text-white text-2xl font-bold">Login</Text>
 
-                    <Text style={{ color: "white", marginTop: 20 }}>Email</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#0F2923", borderRadius: 12, padding: 10, marginTop: 5 }}>
+                    <Text className="text-white mt-5">Email</Text>
+                    <View className="flex-row items-center bg-[#0F2923] rounded-xl p-3 mt-1">
                         <TextInput
-                            style={{ flex: 1, color: "white" }}
+                            className="flex-1 text-white"
                             placeholder="Digite seu email"
                             placeholderTextColor="#7F8F85"
                             keyboardType="email-address"
@@ -98,12 +139,12 @@ export default function RegisterSlides() {
                         />
                         <Mail size={20} color="#00E887" />
                     </View>
-                    {errors.email && <Text style={{ color: "red" }}>{errors.email}</Text>}
+                    {errors.email && <Text className="text-red-500">{errors.email}</Text>}
 
-                    <Text style={{ color: "white", marginTop: 20 }}>Senha</Text>
-                    <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: "#0F2923", borderRadius: 12, padding: 10, marginTop: 5 }}>
+                    <Text className="text-white mt-5">Senha</Text>
+                    <View className="flex-row items-center bg-[#0F2923] rounded-xl p-3 mt-1">
                         <TextInput
-                            style={{ flex: 1, color: "white" }}
+                            className="flex-1 text-white"
                             placeholder="Mínimo 6 caracteres"
                             placeholderTextColor="#7F8F85"
                             secureTextEntry
@@ -112,14 +153,72 @@ export default function RegisterSlides() {
                         />
                         <Lock size={20} color="#00E887" />
                     </View>
-                    {errors.password && <Text style={{ color: "red" }}>{errors.password}</Text>}
-                </View>
+                    {errors.password && <Text className="text-red-500">{errors.password}</Text>}
+                </SafeAreaView>
+            ),
+        },
+        {
+            id: 3,
+            render: () => (
+                <SafeAreaView className="flex-1 px-5">
+                    <ScrollView showsVerticalScrollIndicator>
+                        <Text className="text-white text-2xl font-bold mb-5">
+                            Mostre suas habilidades
+                        </Text>
+
+                        <View className="flex-row flex-wrap">
+                            {TAGS_SKILLS.map(tag => (
+                                <TouchableOpacity
+                                    key={tag}
+                                    onPress={() => toggleSkill(tag)}
+                                    className={`px-4 py-2 mr-2 mb-2 rounded-full border ${selectedSkills.includes(tag)
+                                        ? "bg-[#00B37E] border-[#00B37E]"
+                                        : "border-gray-600"
+                                        }`}
+                                >
+                                    <Text className={`text-white ${selectedSkills.includes(tag) ? "font-bold" : "font-normal"}`}>
+                                        {tag}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </ScrollView>
+                </SafeAreaView>
+            ),
+        },
+        {
+            id: 4,
+            render: () => (
+                <SafeAreaView className="flex-1 px-5">
+                    <ScrollView showsVerticalScrollIndicator>
+                        <Text className="text-white text-2xl font-bold mb-5">
+                            Mostre seus interesses
+                        </Text>
+
+                        <View className="flex-row flex-wrap">
+                            {TAGS_INTERESTS.map(tag => (
+                                <TouchableOpacity
+                                    key={tag}
+                                    onPress={() => toggleInterest(tag)}
+                                    className={`px-4 py-2 mr-2 mb-2 rounded-full border ${selectedInterests.includes(tag)
+                                        ? "bg-[#00B37E] border-[#00B37E]"
+                                        : "border-gray-600"
+                                        }`}
+                                >
+                                    <Text className={`text-white ${selectedInterests.includes(tag) ? "font-bold" : "font-normal"}`}>
+                                        {tag}
+                                    </Text>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
+                    </ScrollView>
+                </SafeAreaView>
             ),
         },
     ];
 
     return (
-        <View style={{ flex: 1, backgroundColor: "#02130A" }}>
+        <SafeAreaView className="flex-1 bg-[#02130A]">
             <FlatList
                 ref={listRef}
                 data={slides}
@@ -130,16 +229,34 @@ export default function RegisterSlides() {
                 renderItem={({ item }) => <View style={{ width }}>{item.render()}</View>}
             />
 
-            <View style={{ padding: 20, alignItems: "center" }}>
+            <View className="p-5 flex-row justify-between items-center">
+                <TouchableOpacity
+                    onPress={() => {
+                        if (index > 0) {
+                            listRef.current?.scrollToIndex({ index: index - 1, animated: true });
+                            setIndex(index - 1);
+                        }
+                    }}
+                    className={`px-4 py-3 rounded-xl border ${index > 0
+                        ? "bg-[#03382D] border-[#00B37E]"
+                        : "bg-[#01120A] border-[#014F3A]"
+                        }`}
+                    disabled={index === 0}
+                >
+                    <Text className={`font-bold text-base ${index > 0 ? "text-[#00E887]" : "text-[#3A7563]"}`}>
+                        Voltar
+                    </Text>
+                </TouchableOpacity>
+
                 <TouchableOpacity
                     onPress={handleNext}
-                    style={{ backgroundColor: "#00B37E", padding: 15, borderRadius: 12, width: "80%", alignItems: "center" }}
+                    className="px-4 py-3 rounded-xl bg-[#00B37E]"
                 >
-                    <Text style={{ color: "#0B1914", fontWeight: "bold", fontSize: 16 }}>
+                    <Text className="text-[#0B1914] font-bold text-base">
                         {index === slides.length - 1 ? "Finalizar" : "Próximo"}
                     </Text>
                 </TouchableOpacity>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
