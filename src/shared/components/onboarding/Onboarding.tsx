@@ -8,11 +8,8 @@ interface OnboardingProps {
     slides: SlidesProps[];
     onFinish: () => void;
 
-    /* Controle de navegação */
-    controlledByButton?: boolean;
     allowSwipe?: boolean;
 
-    /* Estilos customizáveis */
     containerStyle?: StyleProp<ViewStyle>;
     slideContainerStyle?: StyleProp<ViewStyle>;
     titleStyle?: StyleProp<TextStyle>;
@@ -27,17 +24,13 @@ interface OnboardingProps {
 export default function Onboarding({
     slides,
     onFinish,
-    controlledByButton = false,
     allowSwipe = true,
-
     containerStyle,
     slideContainerStyle,
     titleStyle,
     descriptionStyle,
     activeDotColor = "#16A34A",
     inactiveDotColor = "#A7F3D0",
-    buttonStyle,
-    buttonTextStyle,
     buttonText = "Começar",
 }: OnboardingProps) {
     const [index, setIndex] = useState(0);
