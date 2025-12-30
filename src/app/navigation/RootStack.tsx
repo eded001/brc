@@ -4,7 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // screens
 import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
-import Register from "@test/Register";
+import Register from "@test/screens/Register";
+import Auth from "@test/screens/Auth";
 
 // navigation
 const Stack = createNativeStackNavigator();
@@ -46,6 +47,12 @@ export default function RootStack() {
             <Stack.Screen
                 name="Settings"
                 component={Settings}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="Auth"
+                component={Auth}
                 options={{ headerShown: false }}
             />
         </Stack.Navigator>

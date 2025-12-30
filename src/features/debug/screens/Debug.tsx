@@ -15,6 +15,13 @@ export default function Test() {
             >
                 <Text className="text-black text-center text-lg font-semibold">Register</Text>
             </GoToScreen>
+
+            <GoToScreen
+                screen='Auth'
+                className="w-full bg-green-600 py-4 rounded-xl mb-4"
+            >
+                <Text className="text-black text-center text-lg font-semibold">Auth</Text>
+            </GoToScreen>
         </View>
     );
 }

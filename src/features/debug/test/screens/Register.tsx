@@ -31,19 +31,19 @@ const TAGS_SKILLS = [
     "Event-Driven Architecture", "Serverless", "WebAssembly"
 ];
 
-export default function RegisterSlides() {
+export default function Register() {
     const navigation = useNavigation<any>();
     const [index, setIndex] = useState(0);
     const listRef = useRef<FlatList>(null);
 
-    // Campos do cadastro
+    // cadastro
     const [fullName, setFullName] = useState("");
     const [nickname, setNickname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    // Tags
+    // tags
     const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
     const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
 
@@ -59,7 +59,6 @@ export default function RegisterSlides() {
         );
     };
 
-    // Validação
     const validateSlide = (): boolean => {
         const newErrors: Record<string, string> = {};
         if (index === 0) {
