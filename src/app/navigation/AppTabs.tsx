@@ -44,17 +44,17 @@ export default function AppTabs() {
                                         screen="Settings"
                                         icon={Settings}
                                         size={24}
-                                        color={colors.primary}
+                                        color={Colors.primary}
                                     />
                                 ) : null
                             }
                         />
                     ),
                     tabBarHideOnKeyboard: true,
-                    tabBarActiveTintColor: colors.primary,
-                    tabBarInactiveTintColor: colors.borderGray,
+                    tabBarActiveTintColor: Colors.primary,
+                    tabBarInactiveTintColor: Colors.borderGray,
                     tabBarStyle: {
-                        backgroundColor: colors.background,
+                        backgroundColor: Colors.background,
                         height: 60 + insets.bottom,
                         paddingTop: 5,
                         paddingBottom: insets.bottom,
@@ -71,12 +71,12 @@ export default function AppTabs() {
                         return (
                             <View
                                 className={`p-1 mb-1 rounded-xl ${focused ? "bg-[#03382D]" : "bg-transparent"}`}
-                                style={{ backgroundColor: focused ? colors.backButtonActive : "transparent" }}
+                                style={{ backgroundColor: focused ? Colors.backButtonActive : "transparent" }}
                             >
                                 <Icon
                                     color={color}
                                     size={size}
-                                    fill={focused ? `${colors.primary}75` : "none"}
+                                    fill={focused ? `${Colors.primary}75` : "none"}
                                 />
                             </View>
                         );
