@@ -2,8 +2,8 @@ import 'react-native-url-polyfill/auto'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { createClient, processLock } from '@supabase/supabase-js'
 
-const supabaseUrl = 'YOUR_REACT_NATIVE_SUPABASE_URL'
-const supabaseAnonKey = 'YOUR_REACT_NATIVE_SUPABASE_PUBLISHABLE_KEY'
+const supabaseUrl = 'https://mtzshfofdwfhkkoptqep.supabase.co'
+const supabaseAnonKey = 'sb_publishable_39E3JavwlFLRTcRv2GHTHA_qlP97KYK'
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     auth: {

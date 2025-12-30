@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator();
 import AppTabs from "./AppTabs";
 
 export default function RootStack() {
-    const [hasSeenIntroduction, setHasSeenIntroduction] = useState(false);
+    const [hasSeenIntroduction, setHasSeenIntroduction] = useState(true);
 
     return (
         <Stack.Navigator>
@@ -25,18 +25,18 @@ export default function RootStack() {
                         <Introduction
                             onFinish={() => {
                                 setHasSeenIntroduction(true);
-                                navigation.replace("Register");
+                                navigation.replace("AppTabs");
                             }}
                         />
                     )}
                 </Stack.Screen>
             )}
 
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Register"
                 component={Register}
                 options={{ headerShown: false }}
-            />
+            /> */}
 
             <Stack.Screen
                 name="AppTabs"

@@ -11,7 +11,7 @@ import { Debug } from "@screens/debug";
 import { Search as SearchScreen } from "@screens/search";
 
 // components
-import { Header, HeaderAction } from "@navigation/components/Header";
+import { Header, HeaderAction } from "@/components/header";
 
 // colors
 import { Colors } from "@/constants/colors";

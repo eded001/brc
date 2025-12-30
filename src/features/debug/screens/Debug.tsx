@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 
 // components
-import { GoToScreen } from '@/components/goToScreen';
+import { GoToScreen } from '@/components/go-to-screen';
 
 export default function Test() {
     return (
