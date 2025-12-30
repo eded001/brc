@@ -9,11 +9,7 @@ type GoToScreenProps = {
     className?: string;
 };
 
-export default function GoToScreen({
-    screen,
-    children,
-    className
-}: GoToScreenProps) {
+export default function GoToScreen({ screen, children, className }: GoToScreenProps) {
     const navigation =
         useNavigation<any>();
 

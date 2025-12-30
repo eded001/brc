@@ -23,7 +23,6 @@ export default function Introduction({ onFinish }: GoToScreenProps) {
                 activeDotColor="#16A34A"
                 inactiveDotColor="#A7F3D0"
                 buttonText="Vamos lá"
-                controlledByButton={true}
                 allowSwipe={true}
             />
         </View>
