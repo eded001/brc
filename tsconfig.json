@@ -11,13 +11,16 @@
         "src/shared/*"
       ],
       "@screens/*": [
-        "src/features/*"
+        "src/screens/*"
       ],
       "@navigation/*": [
         "src/app/navigation/*"
       ],
       "@test/*": [
-        "src/features/debug/test/*"
+        "src/screens/debug/test/*"
+      ],
+      "@supabase-client": [
+        "src/services/supabase"
       ],
     }
   },

@@ -8,9 +8,10 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           '@': './src/shared',
-          '@screens': './src/features',
+          '@screens': './src/screens',
           '@navigation': './src/app/navigation',
-          '@test': './src/features/debug/test',
+          '@test': './src/screens/debug/test',
+          '@supabase-client': './src/services/supabase',
         },
       },
     ]
