@@ -88,7 +88,13 @@ Nome: Interface / Tela do Usuário
 
 Descrição: Representa toda a camada de apresentação da aplicação, organizada por screens/features
 
-Tecnologias: React, React Native, Typescript, Nativewind, Lucide
+Tecnologias:
+
+- React
+- React Native
+- Typescript
+- Nativewind
+- Lucide
 
 ### 2.2. Backend
 
@@ -96,7 +102,10 @@ Nome: Infraestrutura
 
 Descrição: Comunicação com backend externo, armazenamento e autenticação via Supabase, incluindo PostgreSQL e serviços de autenticação
 
-Tecnologias: Supabase (BaaS), PostgreSQL (via Supabase)
+Tecnologias:
+
+- Supabase (BaaS)
+- PostgreSQL (via Supabase)
 
 ### 2.3. Stacks
 
@@ -104,13 +113,21 @@ Nome: Principais Tecnologias
 
 Descrição: Principais tecnologias e suas versões que fazem o programa funcionar e são essenciais para funcionar
 
-Tecnologias
+Tecnologias:
+
+- Linguagens & Runtimes
     - NodeJS: 22.2.0
     - Java: 17.0.12
+    - Typescript: 5.8.3
+
+- Frameworks de Interface
     - React: 19.2.0
     - React Native: 0.83.1
-    - Typescript: 5.8.3
+
+- Estilização
     - NativeWind: 4.2.1
+
+- Infraestrutura mobile
     - ADB: 1.0.41
     - SDK: 36
     - Build Tools: 36.1.0
@@ -123,7 +140,13 @@ Nome: Supabase
 
 Type: PostgreSQL
 
-Propósito: Gerenciar persistência de dados da aplicação, autenticação, sincronização de estado, execução das operações CRUD e utilização _realtime_
+Propósitos:
+
+- Gerenciar persistência de dados da aplicação
+- Autenticação
+- Sincronização de estado
+- Execução das operações CRUD
+- Utilização _realtime_
 
 ### 3.2. Armazenamento local
 
@@ -131,7 +154,12 @@ Nome: AsyncStorage
 
 Type: Storage local / Key-Value
 
-Propósito: Persistir dados localmente no dispositivo (tokens de autenticação, configurações e estados de interface), acesso rápido a informações que não precisam ser constantemente buscadas do backend, armazenando dados temporários e cache offline
+Propósitos:
+
+- Persistir dados localmente no dispositivo (tokens de autenticação, configurações e estados de interface)
+- Acesso rápido a informações que não precisam ser constantemente buscadas do backend
+- Armazenando dados temporários
+- Cache offline
 
 <!-- ## 4. Integrações externas / APIs
 
@@ -147,7 +175,11 @@ Integration Method: [e.g., REST API, SDK] -->
 
 Cloud Provider: Supabase (BaaS)
 
-Principais serviços utilizados: PostgreSQL (via Supabase), autenticação e Realtime (via Supabase)
+Principais serviços utilizados:
+
+- PostgreSQL (via Supabase)
+- autenticação
+- Realtime (via Supabase)
 
 CI/CD Pipeline: GitHub Actions
 
@@ -186,5 +218,6 @@ Nome: BR Connect
 URL do repositório: [amazonext/br-connect](https://github.com/amazonext/br-connect)
 
 Datas de início:
-    - Call: 14/07/25 - Edgar(@eded001) e Alessandro(@AlessandroDaCostaESilva)
-    - Primeiro commit: 15/08/25
+
+- Call: 14/07/25 - Edgar([@eded.dev](https://www.instagram.com/eded.dev/)) e Alessandro([@_alessilv](https://www.instagram.com/_alessilv/))
+- Primeiro commit: 15/08/25
