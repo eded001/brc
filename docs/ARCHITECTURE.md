@@ -116,7 +116,7 @@ Descrição: Principais tecnologias e suas versões que fazem o programa funcion
 Tecnologias:
 
 - Linguagens & Runtimes
-    - NodeJS: 22.2.0
+    - NodeJS: 22.2.0 (LTS)
     - Java: 17.0.12
     - Typescript: 5.8.3
 
