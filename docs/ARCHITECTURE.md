@@ -2,7 +2,7 @@
 
 ## 1. Estrutura do projeto
 
-Esta seção fornece uma visão geral de alto nível da estrutura de diretórios e arquivos do projeto, categorizada por camada arquitetônica ou principal área funcional. É essencial para navegar rapidamente pelo código-fonte, localizar arquivos relevantes e compreender a organização geral e a separação de responsabilidades.
+Esta seção fornece uma visão geral de alto nível da **estrutura de diretórios e arquivos** do projeto, categorizada por **camada arquitetônica** ou **área funcional principal**. É essencial para navegar rapidamente pelo código-fonte, localizar arquivos relevantes e compreender a **organização geral** e a **separação de responsabilidades**.
 
 ```txt
 ├── app.json                  # Configuração do aplicativo
@@ -70,154 +70,132 @@ Esta seção fornece uma visão geral de alto nível da estrutura de diretórios
 
 ### 1.1. Observações sobre a Arquitetura
 
-- **Domain-Driven Design**: Cada domínio (auth, events, user) segue padrão MVC com repository
-- **Supabase**: Backend-as-a-Service para autenticação, banco de dados e armazenamento
-- **Navigation**: Sistema de navegação com tabs e stack
-- **TypeScript**: Tipagem forte em todo o projeto
+* **Domain-Driven Design**: Cada domínio (*auth, events, user*) segue **padrão MVC com repository**.
+* **Supabase**: Backend-as-a-Service para autenticação, banco de dados e armazenamento.
+* **Navigation**: Sistema de navegação com **tabs** e **stack**.
+* **TypeScript**: Tipagem forte em todo o projeto.
 
-<!-- ## 2. Diagrama de alto nível do sistema
-
-```mermaid
-``` -->
+---
 
 ## 2. Componentes principais
 
 ### 2.1. Frontend
 
-Nome: Interface / Tela do Usuário
+**Nome:** Interface / Tela do Usuário
 
-Descrição: Representa toda a camada de apresentação da aplicação, organizada por screens/features
+**Descrição:** Representa toda a **camada de apresentação** da aplicação, organizada por *screens/features*.
 
-Tecnologias:
+**Tecnologias:**
 
-- React
-- React Native
-- Typescript
-- Nativewind
-- Lucide
+* **React**
+* **React Native**
+* **TypeScript**
+* **NativeWind**
+* **Lucide**
 
 ### 2.2. Backend
 
-Nome: Infraestrutura
+**Nome:** Infraestrutura
 
-Descrição: Comunicação com backend externo, armazenamento e autenticação via Supabase, incluindo PostgreSQL e serviços de autenticação
+**Descrição:** Comunicação com backend externo, armazenamento e autenticação via **Supabase**, incluindo **PostgreSQL** e serviços de autenticação.
 
-Tecnologias:
+**Tecnologias:**
 
-- Supabase (BaaS)
-- PostgreSQL (via Supabase)
+* **Supabase (BaaS)**
+* **PostgreSQL (via Supabase)**
 
 ### 2.3. Stacks
 
-Nome: Principais Tecnologias
+**Nome:** Principais Tecnologias
 
-Descrição: Principais tecnologias e suas versões que fazem o programa funcionar e são essenciais para funcionar
+**Descrição:** Principais tecnologias e suas versões que fazem o programa funcionar e são essenciais.
 
-Tecnologias:
+**Tecnologias:**
 
-- Linguagens & Runtimes
-    - NodeJS: 22.2.0 (LTS)
-    - Java: 17.0.12
-    - Typescript: 5.8.3
+* **Linguagens & Runtimes**
 
-- Frameworks de Interface
-    - React: 19.2.0
-    - React Native: 0.83.1
+  * NodeJS: 22 (LTS)
+  * Java: 17
+  * TypeScript: 5.8.3
+* **Frameworks de Interface**
 
-- Estilização
-    - NativeWind: 4.2.1
+  * React: 19.2.0
+  * React Native: 0.83.1
+* **Estilização**
 
-- Infraestrutura mobile
-    - ADB: 1.0.41
-    - SDK: 36
-    - Build Tools: 36.1.0
+  * NativeWind: 4.2.1
+* **Infraestrutura mobile**
+
+  * ADB: 1.0.41
+  * SDK: 36
+  * Build Tools: 36.1.0
+
+> [!IMPORTANT]
+> O projeto requer uma versão do Java entre **17 e 20**.
+> Versões inferiores a 17 ou superiores a 20 **não são suportadas**.
+
+---
 
 ## 3. Armazenamento de dados
 
 ### 3.1. Banco de dados
 
-Nome: Supabase
+**Nome:** Supabase
 
-Type: PostgreSQL
+**Type:** PostgreSQL
 
-Propósitos:
+**Propósitos:**
 
-- Gerenciar persistência de dados da aplicação
-- Autenticação
-- Sincronização de estado
-- Execução das operações CRUD
-- Utilização _realtime_
+* Gerenciar **persistência de dados** da aplicação
+* **Autenticação**
+* **Sincronização de estado**
+* Execução das operações **CRUD**
+* Utilização de **realtime**
 
 ### 3.2. Armazenamento local
 
-Nome: AsyncStorage
+**Nome:** AsyncStorage
 
-Type: Storage local / Key-Value
+**Type:** Storage local / Key-Value
 
-Propósitos:
+**Propósitos:**
 
-- Persistir dados localmente no dispositivo (tokens de autenticação, configurações e estados de interface)
-- Acesso rápido a informações que não precisam ser constantemente buscadas do backend
-- Armazenando dados temporários
-- Cache offline
+* Persistir dados localmente no dispositivo (*tokens de autenticação, configurações e estados de interface*)
+* Acesso rápido a informações que não precisam ser constantemente buscadas do backend
+* Armazenamento de dados temporários (*cache offline*)
 
-<!-- ## 4. Integrações externas / APIs
+---
 
-(List any third-party services or external APIs the system interacts with.)
+## 4. Deployment & Infrastructure
 
-Service Name 1: [e.g., Stripe, SendGrid, Google Maps API]
+**Cloud Provider:** Supabase (BaaS)
 
-Purpose: [Briefly describe its function, e.g., "Payment processing."]
+**Principais serviços utilizados:**
 
-Integration Method: [e.g., REST API, SDK] -->
+* **PostgreSQL** (via Supabase)
+* **Autenticação**
+* **Realtime** (via Supabase)
 
-## 5. Deployment & Infrastructure
+**CI/CD Pipeline:** GitHub Actions
 
-Cloud Provider: Supabase (BaaS)
+**Monitoramento & Logging:** Supabase Logs (*queries, auth events*)
 
-Principais serviços utilizados:
+---
 
-- PostgreSQL (via Supabase)
-- autenticação
-- Realtime (via Supabase)
+## 5. Considerações de segurança
 
-CI/CD Pipeline: GitHub Actions
+* **Authentication:** JWT (*via Supabase*)
+* **Data Encryption:** Crypto - Módulo do NodeJS
 
-Monitoramento & Logging: Supabase Logs (queries, auth events)
+---
 
-## 6. Considerações de segurança
+## 6. Identificação do projeto
 
-<!-- Authentication: OAuth2 (pendente), JWT - ambos via Supabase -->
+**Nome:** BR Connect
 
-Authentication: JWT (via Supabase)
+**URL do repositório:** [amazonext/br-connect](https://github.com/amazonext/br-connect)
 
-<!-- Authorization: -->
+**Datas de início:**
 
-Data Encryption: Crypto - Módulo do NodeJS
-
-<!-- ## 8. Development & Testing Environment
-
-Local Setup Instructions: [Link to CONTRIBUTING.md or brief steps]
-
-Testing Frameworks: [e.g., Jest, Pytest, JUnit]
-
-Code Quality Tools: [e.g., ESLint, Black, SonarQube] -->
-
-<!-- ## 9. Future Considerations / Roadmap
-
-(Briefly note any known architectural debts, planned major changes, or significant future features that might impact the architecture.)
-
-[e.g., "Migrate from monolith to microservices."]
-
-[e.g., "Implement event-driven architecture for real-time updates."] -->
-
-## 7. Identificação do projeto
-
-Nome: BR Connect
-
-URL do repositório: [amazonext/br-connect](https://github.com/amazonext/br-connect)
-
-Datas de início:
-
-- Call: 14/07/25 - Edgar([@eded.dev](https://www.instagram.com/eded.dev/)) e Alessandro([@_alessilv](https://www.instagram.com/_alessilv/))
-- Primeiro commit: 15/08/25
+* Call: 14/07/25 - Edgar([@eded.dev](https://www.instagram.com/eded.dev/)) e Alessandro([@_alessilv](https://www.instagram.com/_alessilv/))
+* Primeiro commit: 15/08/25
