@@ -1,1 +1,1 @@
-export { default as Profile } from "./screens/Profile";
+export { default as Profile } from './views/Profile';

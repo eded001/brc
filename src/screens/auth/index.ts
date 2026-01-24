@@ -1,5 +1,5 @@
-import ForgotPassword from "./screens/ForgotPassword";
-import Login from "./screens/Login";
-import Register from "./screens/Register";
+import ForgotPassword from './views/ForgotPassword';
+import Login from './views/Login';
+import Register from './views/Register';
 
 export { Login, Register, ForgotPassword };

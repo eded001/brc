@@ -73,6 +73,7 @@ export default function AppTabs() {
         const tab = tabs.find(t => t.name === route.name);
 
         return {
+          // eslint-disable-next-line react/no-unstable-nested-components
           header: () => (
             <Header
               title={tab?.title || ""}
@@ -102,6 +103,7 @@ export default function AppTabs() {
           tabBarLabelStyle: {
             fontWeight: "700",
           },
+          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({ color, size, focused }) => {
             if (!tab) return null;
             const Icon = tab.icon;
@@ -109,6 +111,7 @@ export default function AppTabs() {
             return (
               <View
                 className={`p-1 mb-1 rounded-xl ${focused ? "bg-[#03382D]" : "bg-transparent"}`}
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   backgroundColor: focused
                     ? Colors.backButtonActive

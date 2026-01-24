@@ -1,2 +1,2 @@
-import Events from './screens/Events';
+import Events from './views/Events';
 export { Events };

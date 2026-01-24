@@ -1,1 +1,1 @@
-export { default as Settings } from "./screens/Settings";
+export { default as Settings } from "./views/Settings";

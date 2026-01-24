@@ -1,1 +1,1 @@
-export { default as Debug } from "./screens/Debug";
+export { default as Debug } from './views/Debug';

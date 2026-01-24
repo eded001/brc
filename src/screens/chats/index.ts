@@ -1,3 +1,3 @@
-import Chats from "./screens/Chats";
+import Chats from './views/Chats';
 
 export { Chats };

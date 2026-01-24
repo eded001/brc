@@ -17,9 +17,9 @@
         "src/screens/debug/test/*"
       ],
       "@supabase-client": [
-        "src/services/supabase"
+        "src/libs/supabase"
       ],
-    }
+    },
   },
   "include": [
     "**/*.js",
@@ -28,10 +28,10 @@
     "./nativewind-env.d.ts",
     "./src",
     "./global.css",
-    "nativewind-env.d.ts"
+    "nativewind-env.d.ts",
   ],
   "exclude": [
     "node_modules",
     "Pods"
-  ]
+  ],
 }

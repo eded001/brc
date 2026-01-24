@@ -1,1 +1,1 @@
-export { default as Introduction } from "./screens/Introduction";
+export { default as Introduction } from "./views/Introduction";

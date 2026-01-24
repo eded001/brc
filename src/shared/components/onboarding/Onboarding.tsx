@@ -75,6 +75,7 @@ export default function Onboarding({
                 }}
                 renderItem={({ item }) => (
                     <View
+                        // eslint-disable-next-line react-native/no-inline-styles
                         style={[{ width, paddingHorizontal: 20 }, slideContainerStyle]}
                         className="flex-1 items-center justify-center"
                     >

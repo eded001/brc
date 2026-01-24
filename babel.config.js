@@ -11,9 +11,9 @@ module.exports = {
           '@screens': './src/screens',
           '@navigation': './src/app/navigation',
           '@test': './src/screens/debug/test',
-          '@supabase-client': './src/services/supabase',
+          '@supabase-client': './src/libs/supabase',
         },
       },
-    ]
+    ],
   ],
 };

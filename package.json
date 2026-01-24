@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "start": "react-native start --reset-cache",
     "start:": "react-native start --reset-cache",
-    "test": "jest"
+    "doctor": "react-native doctor"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
