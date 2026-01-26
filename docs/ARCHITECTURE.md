@@ -130,10 +130,6 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
   * SDK: 36
   * Build Tools: 36.1.0
 
-> [!IMPORTANT]
-> O projeto requer uma versão do Java entre **17 e 20**.
-> Versões inferiores a 17 ou superiores a 20 **não são suportadas**.
-
 ---
 
 ## 3. Armazenamento de dados
@@ -194,8 +190,3 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 **Nome:** BR Connect
 
 **URL do repositório:** [amazonext/br-connect](https://github.com/amazonext/br-connect)
-
-**Datas de início:**
-
-* Call: 14/07/25 - Edgar([@eded.dev](https://www.instagram.com/eded.dev/)) e Alessandro([@_alessilv](https://www.instagram.com/_alessilv/))
-* Primeiro commit: 15/08/25
