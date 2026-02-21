@@ -55,6 +55,12 @@ export default function RootStack() {
                 component={Auth}
                 options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+                name="Firebase"
+                component={Firebase}
+                options={{ headerShown: false }}
+            />
         </Stack.Navigator>
     );
 }
