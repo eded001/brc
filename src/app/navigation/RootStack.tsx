@@ -6,6 +6,7 @@ import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
 import Register from "@test/screens/Register";
 import Auth from "@test/screens/Auth";
+import Firebase from "@test/screens/Firebase";
 
 // navigation
 const Stack = createNativeStackNavigator();
