@@ -10,6 +10,7 @@ module.exports = {
           '@': './src/shared',
           '@screens': './src/screens',
           '@navigation': './src/app/navigation',
+          '@debug': './src/screens/debug',
           '@test': './src/screens/debug/test',
           '@supabase-client': './src/libs/supabase',
         },

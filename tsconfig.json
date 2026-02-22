@@ -13,6 +13,9 @@
       "@navigation/*": [
         "src/app/navigation/*"
       ],
+      "@debug/*": [
+        "src/screens/debug/*"
+      ],
       "@test/*": [
         "src/screens/debug/test/*"
       ],
