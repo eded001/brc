@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // screens
-// import { Introduction } from "@screens/introduction";
+import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
 import Welcome from "@test/screens/Welcome";
 import Register from "@test/screens/Register";
@@ -19,11 +19,7 @@ const Stack = createNativeStackNavigator();
 
 // Configuração centralizada das telas
 const screens = [
-    // {
-    //     name: "Introduction",
-    //     isRenderProp: true,
-    // },
-
+    // { name: "Introduction", isRenderProp: true },
     { name: "Welcome", component: Welcome },
     { name: "Register", component: Register },
     { name: "AppTabs", component: AppTabs },
