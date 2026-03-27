@@ -31,12 +31,12 @@ export default function AppTabs() {
       icon: Compass,
       title: "Explorar",
     },
-    {
-      name: "Search",
-      component: SearchScreen,
-      icon: SearchIcon,
-      title: "Procurar",
-    },
+    // {
+    //   name: "Search",
+    //   component: SearchScreen,
+    //   icon: SearchIcon,
+    //   title: "Procurar",
+    // },
     {
       name: "Events",
       component: Events,
@@ -110,13 +110,7 @@ export default function AppTabs() {
 
             return (
               <View
-                className={`p-1 mb-1 rounded-xl ${focused ? "bg-[#03382D]" : "bg-transparent"}`}
-                // eslint-disable-next-line react-native/no-inline-styles
-                style={{
-                  backgroundColor: focused
-                    ? Colors.backButtonActive
-                    : "transparent",
-                }}
+                className={`p-1 mb-1 rounded-xl`}
               >
                 <Icon
                   color={color}
