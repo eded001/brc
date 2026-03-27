@@ -9,7 +9,7 @@ import { Colors } from "@/constants/colors";
 
 export default function Header({ title, action }: HeaderProps) {
     return (
-        <View className={`flex-row items-center justify-between px-6 pt-10`} style={{ backgroundColor: Colors.background }}>
+        <View className={`flex-row items-center justify-between px-6 pt-12 pb-2`} style={{ backgroundColor: Colors.background }}>
             <View className="flex-row items-center gap-2">
                 <Text
                     className="text-2xl p-2 rounded-lg"
