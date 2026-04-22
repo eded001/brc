@@ -12,7 +12,7 @@ module.exports = {
           '@navigation': './src/app/navigation',
           '@debug': './src/screens/debug',
           '@test': './src/screens/debug/test',
-          '@supabase-client': './src/libs/supabase',
+          '@firebase-client': './src/libs/firebase',
         },
       },
     ],
