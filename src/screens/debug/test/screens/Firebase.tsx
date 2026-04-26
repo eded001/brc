@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {    Text,    View,    ActivityIndicator,    Pressable,    ScrollView} from "react-native";
+import { Text, View, ActivityIndicator, Pressable, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import firestore from "@react-native-firebase/firestore";
 import NetInfo from "@react-native-community/netinfo";
@@ -13,6 +13,22 @@ interface DeviceData {
     internetType: string;
     platform: string;
     timestamp: string;
+}
+
+function formatInternetType(type: string | null | undefined): string {
+    switch (type) {
+        case "wifi":
+            return "Wi-Fi";
+        case "cellular":
+            return "Dados móveis";
+        case "ethernet":
+            return "Ethernet";
+        case "none":
+            return "Sem conexão";
+        case "unknown":
+        default:
+            return "Desconhecido";
+    }
 }
 
 export default function Firebase() {
@@ -120,9 +136,8 @@ export default function Firebase() {
                     <Pressable
                         onPress={collectAndSend}
                         disabled={loading}
-                        className={`rounded-xl py-4 items-center ${
-                            loading ? "bg-zinc-700" : "bg-emerald-600"
-                        }`}
+                        className={`rounded-xl py-4 items-center ${loading ? "bg-zinc-700" : "bg-emerald-600"
+                            }`}
                     >
                         {loading ? (
                             <ActivityIndicator size="small" color="#fff" />
@@ -175,10 +190,9 @@ export default function Firebase() {
                                         <View
                                             className="h-full bg-yellow-500"
                                             style={{
-                                                width: `${
-                                                    100 -
+                                                width: `${100 -
                                                     (retryCountdown / 8) * 100
-                                                }%`,
+                                                    }%`,
                                             }}
                                         />
                                     </View>
