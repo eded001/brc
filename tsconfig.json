@@ -8,19 +8,19 @@
         "src/shared/*"
       ],
       "@screens/*": [
-        "src/screens/*"
+        "src/presentation/*"
       ],
       "@navigation/*": [
         "src/app/navigation/*"
       ],
       "@debug/*": [
-        "src/screens/debug/*"
+        "src/presentation/debug/*"
       ],
       "@test/*": [
-        "src/screens/debug/test/*"
+        "src/presentation/debug/test/*"
       ],
       "@firebase-client": [
-        "src/libs/firebase"
+        "src/libs/infrastructure/firebase"
       ],
     },
   },

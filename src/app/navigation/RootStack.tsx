@@ -4,9 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 // screens
 import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
-import Welcome from "@test/screens/Welcome";
-import Register from "@test/screens/Register";
-import Firebase from "@test/screens/Firebase";
+import Welcome from "@debug/test/screens/Welcome";
+import Register from "@debug/test/screens/Register";
+import Firebase from "@debug/test/screens/Firebase";
 
 // navigation
 import AppTabs from "./AppTabs";

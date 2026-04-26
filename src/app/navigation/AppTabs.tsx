@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CircleUserRound, Bug, Compass, Search as SearchIcon, Settings, MessageCircle, TicketsIcon, } from "lucide-react-native";
+import { CircleUserRound, Bug, Compass, Settings, MessageCircle, TicketsIcon, } from "lucide-react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View } from "react-native";
 
@@ -8,7 +8,6 @@ import { View } from "react-native";
 import { Explore } from "@screens/explore";
 import { Profile } from "@screens/profile";
 import { Debug } from "@screens/debug";
-import { Search as SearchScreen } from "@screens/search";
 import { Chats } from "@screens/chats";
 import { Events } from "@screens/events";
 
@@ -31,12 +30,6 @@ export default function AppTabs() {
       icon: Compass,
       title: "Explorar",
     },
-    // {
-    //   name: "Search",
-    //   component: SearchScreen,
-    //   icon: SearchIcon,
-    //   title: "Procurar",
-    // },
     {
       name: "Events",
       component: Events,

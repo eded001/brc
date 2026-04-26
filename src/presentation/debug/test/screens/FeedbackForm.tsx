@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Pressable, ScrollView, ActivityIndicator, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { RadioOption } from "@screens/debug/components/Radio";
-import { Section } from "@screens/debug/components/Section";
+import { RadioOption } from "src/presentation/debug/components/Radio";
+import { Section } from "src/presentation/debug/components/Section";
 
-import { feedbackSchema } from "@screens/debug/schemas/feedback.schema";
+import { feedbackSchema } from "src/presentation/debug/schemas/feedback.schema";
 
 type FormErrors = Record<string, string>;
 

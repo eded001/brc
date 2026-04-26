@@ -8,10 +8,10 @@ module.exports = {
         extensions: ['.ios.js', '.android.js', '.js', '.ts', '.tsx', '.json'],
         alias: {
           '@': './src/shared',
-          '@screens': './src/screens',
+          '@screens': './src/presentation',
           '@navigation': './src/app/navigation',
-          '@debug': './src/screens/debug',
-          '@test': './src/screens/debug/test',
+          '@debug': './src/presentation/debug',
+          '@test': './src/presentation/debug/test',
           '@firebase-client': './src/libs/firebase',
         },
       },
