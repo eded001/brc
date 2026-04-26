@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, KeyboardAvoidingView, Modal, Platform, Pressable, StatusBar, Text, TextInput, View, } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import firestore, { FirebaseFirestoreTypes } from '@react-native-firebase/firestore';
+import firestore, { FirebaseFirestoreTypes, serverTimestamp } from '@react-native-firebase/firestore';
 import uuid from 'react-native-uuid';
 
 // ─── Tipos ────────────────────────────────────────────────────────────────────
@@ -66,7 +66,6 @@ const Avatar = ({
 }) => {
     const color = avatarColorFor(uid);
     const dim = size === 'md' ? 'w-10 h-10' : 'w-7 h-7';
-    const font = size === 'md' ? 'text-sm font-bold' : 'text-xs font-bold';
 
     return (
         <View
@@ -301,7 +300,7 @@ export default function ChatScreen() {
                     text,
                     senderId: currentUser.uid,
                     senderName: currentUser.name,
-                    createdAt: firestore.FieldValue.serverTimestamp(),
+                    createdAt: serverTimestamp(),
                 });
         } catch (error) {
             console.error('Erro ao enviar:', error);
