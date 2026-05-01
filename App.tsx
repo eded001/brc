@@ -3,9 +3,11 @@ import { Platform, StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import RootStack from '@navigation/RootStack';
 import { usePushNotifications } from '@debug/hooks/usePushNotifications';
-import firestore from '@react-native-firebase/firestore';
+import { getApp } from '@react-native-firebase/app';
+import { getFirestore, collection, doc, setDoc } from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
+import { AuthProvider } from './src/app/contexts/AuthContext';
 
 async function getOrCreateDeviceId(): Promise<string> {
   const stored = await AsyncStorage.getItem('@device_id');
@@ -23,10 +25,14 @@ function AppContent() {
     async (token) => {
       const deviceId = await getOrCreateDeviceId();
 
-      await firestore()
-        .collection('devices')
-        .doc(deviceId)
-        .set({ fcmToken: token, platform: Platform.OS }, { merge: true });
+      const app = getApp();
+      const db = getFirestore(app);
+
+      await setDoc(
+        doc(collection(db, 'devices'), deviceId),
+        { fcmToken: token, platform: Platform.OS },
+        { merge: true }
+      );
     },
     (screen, params) => {
       navigation.navigate(screen as never, params as never);
@@ -40,9 +46,11 @@ export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <NavigationContainer>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <AppContent />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
