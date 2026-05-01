@@ -19,8 +19,11 @@
       "@test/*": [
         "src/presentation/debug/test/*"
       ],
-      "@firebase-client": [
-        "src/libs/infrastructure/firebase"
+      "@libs/*": [
+        "src/libs/*"
+      ],
+      "@app/*": [
+        "src/app/*"
       ],
     },
   },
