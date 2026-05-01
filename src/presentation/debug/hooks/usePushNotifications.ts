@@ -1,15 +1,17 @@
 import { useEffect, useRef } from 'react';
-import messaging, {
-    FirebaseMessagingTypes,
-} from '@react-native-firebase/messaging';
+import { Platform } from 'react-native';
+
+import { getApp } from '@react-native-firebase/app';
+import { getMessaging, getToken, onMessage, onTokenRefresh, onNotificationOpenedApp, getInitialNotification, requestPermission, registerDeviceForRemoteMessages, FirebaseMessagingTypes, AuthorizationStatus } from '@react-native-firebase/messaging';
+
 import notifee, {
     AndroidImportance,
     AndroidVisibility,
     EventType,
 } from '@notifee/react-native';
-import { Platform } from 'react-native';
 
-// ─── Cria canal Android uma única vez ────────────────────────────────────────
+
+// Cria canal Android
 async function createAndroidChannel() {
     await notifee.createChannel({
         id: 'default',
@@ -21,7 +23,8 @@ async function createAndroidChannel() {
     });
 }
 
-// ─── Exibe notificação local (foreground) ────────────────────────────────────
+
+// Notificação local
 async function displayLocalNotification(
     remoteMessage: FirebaseMessagingTypes.RemoteMessage,
 ) {
@@ -34,9 +37,8 @@ async function displayLocalNotification(
         data,
         android: {
             channelId: 'default',
-            smallIcon: 'ic_notification', // nome do drawable
+            smallIcon: 'ic_notification',
             pressAction: { id: 'default' },
-            // badge no ícone do app
             badgeCount: 1,
         },
         ios: {
@@ -46,32 +48,31 @@ async function displayLocalNotification(
     });
 }
 
-// ─── Pede permissão e retorna o FCM token ────────────────────────────────────
-async function requestPermissionAndGetToken(): Promise<string | null> {
-    // iOS: pede permissão
+
+// Permissão + Token
+async function requestPermissionAndGetToken(messaging: any) {
+    // iOS
     if (Platform.OS === 'ios') {
-        const authStatus = await messaging().requestPermission();
+        const authStatus = await requestPermission(messaging);
         const allowed =
-            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+            authStatus === AuthorizationStatus.AUTHORIZED ||
+            authStatus === AuthorizationStatus.PROVISIONAL;
+
         if (!allowed) return null;
+
+        await registerDeviceForRemoteMessages(messaging);
     }
 
-    // Android 13+: pede permissão POST_NOTIFICATIONS
+    // Android 13+
     if (Platform.OS === 'android') {
         await notifee.requestPermission();
     }
 
-    // Garante que o dispositivo está registrado no APNs (iOS)
-    if (Platform.OS === 'ios') {
-        await messaging().registerDeviceForRemoteMessages();
-    }
-
-    const token = await messaging().getToken();
-    return token;
+    return await getToken(messaging);
 }
 
-// ─── Handler para quando usuário toca na notificação ─────────────────────────
+
+// Navegação
 type NavigationHandler = (screen: string, params?: object) => void;
 
 function handleNotificationPress(
@@ -79,11 +80,15 @@ function handleNotificationPress(
     navigate: NavigationHandler,
 ) {
     if (data?.screen) {
-        navigate(data.screen, data.params ? JSON.parse(data.params) : undefined);
+        navigate(
+            data.screen,
+            data.params ? JSON.parse(data.params) : undefined
+        );
     }
 }
 
-// ─── Hook principal ───────────────────────────────────────────────────────────
+
+// Hook
 export function usePushNotifications(
     onTokenReceived: (token: string) => void,
     navigate: NavigationHandler,
@@ -91,62 +96,66 @@ export function usePushNotifications(
     const tokenRef = useRef<string | null>(null);
 
     useEffect(() => {
-        let unsubscribeForeground: (() => void) | undefined;
-        let unsubscribeNotifee: (() => void) | undefined;
+        const app = getApp();
+        const messaging = getMessaging(app);
+
+        let unsubscribeForeground: any;
+        let unsubscribeToken: any;
+        let unsubscribeOpened: any;
+        let unsubscribeNotifee: any;
 
         async function init() {
             await createAndroidChannel();
 
-            const token = await requestPermissionAndGetToken();
+            const token = await requestPermissionAndGetToken(messaging);
             if (!token) return;
 
-            // Evita reenviar o mesmo token
             if (tokenRef.current !== token) {
                 tokenRef.current = token;
                 onTokenReceived(token);
                 console.log('[FCM] Token:', token);
             }
 
-            // Token renovado (ex: reinstalação, backup restaurado)
-            messaging().onTokenRefresh(newToken => {
+            // TOKEN REFRESH
+            unsubscribeToken = onTokenRefresh(messaging, newToken => {
                 tokenRef.current = newToken;
                 onTokenReceived(newToken);
             });
 
-            // ── Foreground ──────────────────────────────────────────────────────────
-            unsubscribeForeground = messaging().onMessage(async remoteMessage => {
+            // FOREGROUND
+            unsubscribeForeground = onMessage(messaging, async remoteMessage => {
                 console.log('[FCM] Foreground:', remoteMessage);
                 await displayLocalNotification(remoteMessage);
             });
 
-            // ── Background: usuário tocou na notificação ────────────────────────────
-            messaging().onNotificationOpenedApp(remoteMessage => {
-                console.log('[FCM] Background tap:', remoteMessage);
-                handleNotificationPress(
-                    remoteMessage.data as Record<string, string>,
-                    navigate,
-                );
-            });
+            // BACKGROUND TAP
+            unsubscribeOpened = onNotificationOpenedApp(
+                messaging,
+                remoteMessage => {
+                    handleNotificationPress(
+                        remoteMessage.data as Record<string, string>,
+                        navigate
+                    );
+                }
+            );
 
-            // ── Quit state: app foi aberto pela notificação ─────────────────────────
-            const initialMessage = await messaging().getInitialNotification();
+            // QUIT STATE
+            const initialMessage = await getInitialNotification(messaging);
             if (initialMessage) {
-                console.log('[FCM] Quit state tap:', initialMessage);
-                // Pequeno delay para garantir que a navegação já está pronta
                 setTimeout(() => {
                     handleNotificationPress(
                         initialMessage.data as Record<string, string>,
-                        navigate,
+                        navigate
                     );
                 }, 500);
             }
 
-            // ── Notifee: press em notificações locais ───────────────────────────────
+            // NOTIFEE
             unsubscribeNotifee = notifee.onForegroundEvent(({ type, detail }) => {
                 if (type === EventType.PRESS) {
                     handleNotificationPress(
                         detail.notification?.data as Record<string, string>,
-                        navigate,
+                        navigate
                     );
                 }
             });
@@ -156,7 +165,9 @@ export function usePushNotifications(
 
         return () => {
             unsubscribeForeground?.();
+            unsubscribeToken?.();
+            unsubscribeOpened?.();
             unsubscribeNotifee?.();
         };
-    }, []);
+    }, [onTokenReceived, navigate]);
 }
