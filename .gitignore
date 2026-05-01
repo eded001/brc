@@ -78,3 +78,4 @@ package-lock.json
 # dev
 .env
 google-services.json
+firebaseConfig.ts
