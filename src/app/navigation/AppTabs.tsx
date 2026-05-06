@@ -34,7 +34,7 @@ export default function AppTabs() {
       name: "Events",
       component: Events,
       icon: TicketsIcon,
-      title: "Eventos",
+      title: "Criar evento",
     },
     {
       name: "Chats",
