@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, Pressable } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+import { Logger } from "../../../libs/infrastructure/logger/Logger";
 
 export default function ProfileScreen() {
     const [loading, setLoading] = useState(true);
@@ -43,14 +44,14 @@ export default function ProfileScreen() {
                 });
 
             } catch (err) {
-                console.log('[PROFILE] erro', err);
+                Logger.error('RBAC', 'Erro ao carregar o perfil do usuário', err);
             } finally {
                 setLoading(false);
             }
         }
 
         loadUser();
-    }, []);
+    }, [navigation]);
 
     async function logout() {
         await auth().signOut();

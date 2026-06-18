@@ -8,35 +8,25 @@ import { useAuth } from "@libs/application/auth/useAuth";
 // screens
 import { Introduction } from "@screens/introduction";
 import { Settings } from "@screens/settings";
-import Welcome from "@debug/test/screens/Welcome";
-import Register from "@debug/test/screens/Register";
-import Firebase from "@debug/test/screens/Firebase";
-import Auth from "@screens/debug/test/screens/Auth";
-import RBAC from "@screens/debug/test/screens/RBAC";
-import Invite from "@screens/debug/test/screens/Invite";
-import PrivateChatScreen from "@screens/debug/test/screens/PrivateChatScreen";
+import Welcome from "@screens/auth/views/Welcome";
+import Register from "@screens/auth/views/Register";
+import Auth from "@screens/auth/views/Auth";
+import Firebase from "@screens/settings/views/Firebase";
+import RBAC from "@screens/settings/views/RBAC";
+import Invite from "@screens/chats/views/Chats";
+import PrivateChatScreen from "@screens/chats/views/PrivateChatScreen";
 
 // navigation
 import AppTabs from "./AppTabs";
 
 const Stack = createNativeStackNavigator();
 
-const screens = [
-    // { name: "Introduction", isRenderProp: true },
-    { name: "Welcome", component: Welcome },
-    { name: "Register", component: Register },
-    { name: "AppTabs", component: AppTabs },
-    { name: "Settings", component: Settings },
-    { name: "Firebase", component: Firebase },
-    { name: "Auth", component: Auth },
-    { name: "Invite", component: Invite },
-    { name: "PrivateChat", component: PrivateChatScreen },
-];
+
 
 export default function RootStack() {
     const { user, loading } = useAuth();
 
-    const [hasSeenIntroduction, setHasSeenIntroduction] = useState(false);
+    const [hasSeenIntroduction, setHasSeenIntroduction] = useState(true);
 
     if (loading) {
         return (

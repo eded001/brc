@@ -10,6 +10,8 @@ import notifee, {
     EventType,
 } from '@notifee/react-native';
 
+import { Logger } from '../../../libs/infrastructure/logger/Logger';
+
 
 // Cria canal Android
 async function createAndroidChannel() {
@@ -50,7 +52,7 @@ async function displayLocalNotification(
 
 
 // Permissão + Token
-async function requestPermissionAndGetToken(messaging: any) {
+async function requestPermissionAndGetToken(messaging: FirebaseMessagingTypes.Module) {
     // iOS
     if (Platform.OS === 'ios') {
         const authStatus = await requestPermission(messaging);
@@ -99,10 +101,10 @@ export function usePushNotifications(
         const app = getApp();
         const messaging = getMessaging(app);
 
-        let unsubscribeForeground: any;
-        let unsubscribeToken: any;
-        let unsubscribeOpened: any;
-        let unsubscribeNotifee: any;
+        let unsubscribeForeground: (() => void) | undefined;
+        let unsubscribeToken: (() => void) | undefined;
+        let unsubscribeOpened: (() => void) | undefined;
+        let unsubscribeNotifee: (() => void) | undefined;
 
         async function init() {
             await createAndroidChannel();
@@ -113,7 +115,7 @@ export function usePushNotifications(
             if (tokenRef.current !== token) {
                 tokenRef.current = token;
                 onTokenReceived(token);
-                console.log('[FCM] Token:', token);
+                Logger.info('FCM', 'Token recebido', token);
             }
 
             // TOKEN REFRESH
@@ -124,7 +126,7 @@ export function usePushNotifications(
 
             // FOREGROUND
             unsubscribeForeground = onMessage(messaging, async remoteMessage => {
-                console.log('[FCM] Foreground:', remoteMessage);
+                Logger.info('FCM', 'Foreground message', remoteMessage);
                 await displayLocalNotification(remoteMessage);
             });
 

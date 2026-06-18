@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, Pressable, ScrollView, Modal, Alert, } from "react-native";
+import { View, Text, Pressable, ScrollView, Modal, Alert, NativeSyntheticEvent, TextInputContentSizeChangeEventData } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Edit, Trash } from "lucide-react-native";
 import { auth } from "@libs/infrastructure/firebase/client";
+import { Logger } from "../../../libs/infrastructure/logger/Logger";
+import { Input } from "../../../shared/components/input/Input";
+import { Button } from "../../../shared/components/button/Button";
 
 export default function Events() {
     const [userId, setUserId] = useState(null);
@@ -12,10 +15,9 @@ export default function Events() {
     useEffect(() => {
         auth().onAuthStateChanged(user => {
             setUserId(user?.uid || null);
+            Logger.info('Events', 'User ID mudou', user?.uid);
         });
     }, []);
-
-    console.log("👤 USER ID:", userId);
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -53,7 +55,7 @@ export default function Events() {
     const MIN_HEIGHT = 0;   // equivalente ao h-24
     const MAX_HEIGHT = 180;  // limite estratégico
 
-    const handleContentSizeChange = (event: any) => {
+    const handleContentSizeChange = (event: NativeSyntheticEvent<TextInputContentSizeChangeEventData>) => {
         const newHeight = event.nativeEvent.contentSize.height;
 
         const clampedHeight = Math.min(
@@ -163,26 +165,22 @@ export default function Events() {
                 <ScrollView
                     keyboardShouldPersistTaps="handled"
                 >
-                    <Text className="text-xs mb-2 text-muted">TÍTULO</Text>
-                    <TextInput
+                    <Input
+                        label="TÍTULO"
                         value={title}
                         onChangeText={setTitle}
                         placeholder="Qual o nome do evento?"
-                        placeholderTextColor="#3A6654"
-                        className="bg-surface border border-borderSub rounded-xl px-4 py-3 mb-4 text-whiteSoft"
                     />
 
-                    <Text className="text-xs mb-2 text-muted">DESCRIÇÃO</Text>
-                    <TextInput
+                    <Input
+                        label="DESCRIÇÃO"
                         value={description}
                         onChangeText={setDescription}
                         placeholder="Conte um pouco sobre o evento"
-                        placeholderTextColor="#3A6654"
                         multiline
                         onContentSizeChange={handleContentSizeChange}
-                        scrollEnabled={height >= MAX_HEIGHT} // ativa scroll quando atingir limite
+                        scrollEnabled={height >= MAX_HEIGHT}
                         style={{ height }}
-                        className="bg-surface border border-borderSub rounded-xl px-4 py-3 mb-4 text-whiteSoft"
                     />
 
                     {/* RANGE */}
@@ -328,27 +326,22 @@ export default function Events() {
                     </Pressable>
 
                     {/* LOCAL */}
-                    <Text className="text-xs mx-2 text-muted">LOCAL</Text>
-                    <TextInput
+                    <Input
+                        label="LOCAL"
                         value={location}
                         onChangeText={setLocation}
                         placeholder="Onde será?"
-                        placeholderTextColor="#3A6654"
-                        className="bg-surface border border-borderSub rounded-xl px-4 py-3 mb-5 text-whiteSoft"
                     />
 
                     {/* BOTÃO */}
-                    <Pressable
+                    <Button
+                        title="Concluir"
                         onPress={() => {
                             const payload = buildEventPayload();
-
-                            console.log("📦 EVENT PAYLOAD:");
-                            console.log(payload);
+                            Logger.info('Events', 'Payload Final', payload);
                         }}
-                        className="bg-primary py-3 rounded-lg items-center mb-10"
-                    >
-                        <Text className="text-bg font-bold">Concluir</Text>
-                    </Pressable>
+                        className="mb-10"
+                    />
                 </ScrollView>
             </KeyboardAwareScrollView>
 
@@ -377,11 +370,11 @@ export default function Events() {
                             </Text>
                         </Pressable>
 
-                        <TextInput
+                        <Input
+                            label="Nome"
                             value={personName}
                             onChangeText={setPersonName}
                             placeholder="Nome"
-                            className="bg-surface border border-borderSub rounded-xl px-4 py-3 mb-3 text-whiteSoft"
                         />
 
                         {["Organização", "Recepção", "Palestra"].map((label) => {
@@ -403,12 +396,11 @@ export default function Events() {
                             );
                         })}
 
-                        <Pressable
+                        <Button
+                            title="Salvar"
                             onPress={handleSave}
-                            className="bg-primary py-3 rounded-lg items-center mt-4"
-                        >
-                            <Text className="text-bg font-bold">Salvar</Text>
-                        </Pressable>
+                            className="mt-4"
+                        />
                         <Pressable
                             onPress={() => {
                                 setModalVisible(false);

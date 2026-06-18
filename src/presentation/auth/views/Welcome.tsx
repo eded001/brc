@@ -1,9 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { View, Text, FlatList, Pressable, Dimensions, Animated, Image, StatusBar, ViewToken, } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useNavigation } from "@react-navigation/native";
-
-/* ─── Dimensões ───────────────────────────────────────────── */
 
 const { width: W, height: H } = Dimensions.get("window");
 const SLIDER_H = H * 0.62;
@@ -166,6 +163,7 @@ const BtnPrimary = ({
                 {({ pressed }) => (
                     <Text
                         className="text-bg text-[15px] font-extrabold"
+                        // eslint-disable-next-line react-native/no-inline-styles
                         style={{ opacity: pressed ? 0.85 : 1 }}
                     >
                         {label}
@@ -214,6 +212,7 @@ const BtnSecondary = ({
                 {({ pressed }) => (
                     <Text
                         className="text-muted text-[15px] font-semibold"
+                        // eslint-disable-next-line react-native/no-inline-styles
                         style={{ opacity: pressed ? 0.6 : 1 }}
                     >
                         {label}
@@ -227,7 +226,7 @@ const BtnSecondary = ({
 /* ─── WelcomeScreen ───────────────────────────────────────── */
 
 export default function WelcomeScreen() {
-    const navigation = useNavigation<any>();
+
     const [activeIndex, setActiveIndex] = useState(0);
     const flatRef = useRef<FlatList>(null);
 
@@ -248,7 +247,7 @@ export default function WelcomeScreen() {
                 useNativeDriver: true,
             }),
         ]).start();
-    }, []);
+    }, [masterOpacity, masterY]);
 
     const onViewableItemsChanged = useCallback(
         ({ viewableItems }: { viewableItems: ViewToken[] }) => {

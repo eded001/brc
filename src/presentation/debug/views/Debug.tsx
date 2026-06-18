@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Alert } from 'react-native';
 
 import { useAuth } from "@libs/application/auth/useAuth";
 
 // components
+import { Logger } from "../../../libs/infrastructure/logger/Logger";
 import { GoToScreen } from '@/components/go-to-screen';
 
 // Routes
@@ -23,7 +24,8 @@ export default function Test() {
         try {
             await signOut();
         } catch (error) {
-            console.error("Erro ao deslogar", error);
+            Logger.error('Debug', 'Erro ao deslogar', error);
+            Alert.alert("Erro", "Falha ao deslogar.");
         }
     }
 

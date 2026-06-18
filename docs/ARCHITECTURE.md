@@ -21,40 +21,29 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 ├── src/                      # Código fonte principal
 │   ├── app/                  # Configurações e navegação global da aplicação
 │   │   ├── config/           # Arquivos de configuração
-│   │   └── navigation/       # Estrutura de navegação
-│   │       ├── RootStack.tsx # Stack principal
-│   │       └── AppTabs.tsx   # Navegação por abas
+│   │   ├── contexts/         # Contextos globais da aplicação
+│   │   ├── navigation/       # Estrutura de navegação
+│   │   └── providers/        # Provedores de estado e configuração
 │   │
-│   ├── libs/                 # Lógica de domínio e integração com backend
+│   ├── libs/                 # Lógica de aplicação, domínio e infraestrutura
+│   │   ├── application/      # Casos de uso e orquestração
 │   │   ├── domain/           # Módulos de domínio da aplicação
 │   │   │   ├── auth/         # Domínio de autenticação
-│   │   │   │   ├── index.ts  # Barrel export
-│   │   │   │   └── src/
-│   │   │   │       ├── controller.ts  # Orquestra fluxos do domínio
-│   │   │   │       ├── service.js     # Regras de negócio
-│   │   │   │       ├── repository.ts  # Acesso a dados
-│   │   │   │       ├── model.ts       # Modelo de domínio
-│   │   │   │       ├── schema.ts      # Validação / tipagem
-│   │   │   │       └── middleware.ts  # Regras intermediárias
 │   │   │   ├── events/       # Domínio de eventos
 │   │   │   └── user/         # Domínio de usuário
 │   │   │
-│   │   └── supabase/         # Infraestrutura para backend externo
-│   │       ├── client.ts     # Cliente Supabase
-│   │       ├── appState.ts   # Gerenciamento de estado global da aplicação
-│   │       └── index.ts      # Barrel export
+│   │   └── infrastructure/   # Infraestrutura para backend externo
+│   │       ├── firebase/     # Integração com Firebase
+│   │       └── storage/      # Gerenciamento de armazenamento local
 │   │
-│   ├── screens/              # Telas da aplicação
+│   ├── presentation/         # Telas da aplicação e componentes visuais
 │   │   ├── auth/             # Fluxo de autenticação
-│   │   │   ├── views/        # Telas
-│   │   │   └── components/   # Componentes específicos do módulo
 │   │   ├── chats/            # Fluxo de chats
 │   │   ├── debug/            # Telas de debug e testes
 │   │   ├── events/           # Fluxo de eventos
 │   │   ├── explore/          # Exploração de conteúdo
 │   │   ├── introduction/     # Introdução
 │   │   ├── profile/          # Perfil do usuário
-│   │   ├── search/           # Tela de busca
 │   │   └── settings/         # Configurações do usuário
 │   │
 │   └── shared/               # Recursos compartilhados
@@ -70,8 +59,8 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 
 ### 1.1. Observações sobre a Arquitetura
 
-* **Domain-Driven Design**: Cada domínio (*auth, events, user*) segue **padrão MVC com repository**.
-* **Supabase**: Backend-as-a-Service para autenticação, banco de dados e armazenamento.
+* **Domain-Driven Design**: Cada domínio (*auth, events, user*) foca nas regras de negócio e estrutura.
+* **Firebase**: Backend-as-a-Service para autenticação, banco de dados (Firestore) e armazenamento.
 * **Navigation**: Sistema de navegação com **tabs** e **stack**.
 * **TypeScript**: Tipagem forte em todo o projeto.
 
@@ -97,12 +86,12 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 
 **Nome:** Infraestrutura
 
-**Descrição:** Comunicação com backend externo, armazenamento e autenticação via **Supabase**, incluindo **PostgreSQL** e serviços de autenticação.
+**Descrição:** Comunicação com backend externo, armazenamento e autenticação via **Firebase**, incluindo **Firestore** e serviços de autenticação.
 
 **Tecnologias:**
 
-* **Supabase (BaaS)**
-* **PostgreSQL (via Supabase)**
+* **Firebase (BaaS)**
+* **Firestore**
 
 ### 2.3. Stacks
 
@@ -136,9 +125,9 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 
 ### 3.1. Banco de dados
 
-**Nome:** Supabase
+**Nome:** Firebase
 
-**Type:** PostgreSQL
+**Type:** Firestore (NoSQL)
 
 **Propósitos:**
 
@@ -164,23 +153,23 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 
 ## 4. Deployment & Infrastructure
 
-**Cloud Provider:** Supabase (BaaS)
+**Cloud Provider:** Firebase (BaaS)
 
 **Principais serviços utilizados:**
 
-* **PostgreSQL** (via Supabase)
-* **Autenticação**
-* **Realtime** (via Supabase)
+* **Firestore** (Database)
+* **Autenticação** (Firebase Auth)
+* **Realtime** (Firestore / Messaging)
 
 **CI/CD Pipeline:** GitHub Actions
 
-**Monitoramento & Logging:** Supabase Logs (*queries, auth events*)
+**Monitoramento & Logging:** Firebase Crashlytics / Analytics (se aplicável)
 
 ---
 
 ## 5. Considerações de segurança
 
-* **Authentication:** JWT (*via Supabase*)
+* **Authentication:** JWT (*via Firebase Auth*)
 * **Data Encryption:** Crypto - Módulo do NodeJS
 
 ---
@@ -189,4 +178,4 @@ Esta seção fornece uma visão geral de alto nível da **estrutura de diretóri
 
 **Nome:** BR Connect
 
-**URL do repositório:** [amazonext/br-connect](https://github.com/amazonext/br-connect)
+**URL do repositório:** [eded001/brc](https://github.com/eded001/brc)

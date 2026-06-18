@@ -3,13 +3,13 @@ import * as authService from '@libs/domain/auth/src/service';
 
 export const AuthContext = createContext({});
 
-export function AuthProvider({ children } : any) {
+export function AuthProvider({ children } : { children: React.ReactNode }) {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const unsubscribe = authService.onAuthStateChanged(user => {
-            setUser(user);
+        const unsubscribe = authService.onAuthStateChanged(authUser => {
+            setUser(authUser);
             setLoading(false);
         });
 

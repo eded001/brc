@@ -1,4 +1,6 @@
+import React from 'react';
+
 export type HeaderProps = {
     title?: string,
-    action: any
+    action?: React.ReactNode;
 }

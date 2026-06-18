@@ -1,22 +1,22 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackProps } from "@/constants/types/rootStack";
+import { Logger } from "../../../libs/infrastructure/logger/Logger";
+import { RootStackParamList, RootStackNavigationProp } from "../../../../app/navigation/types";
 
-type GoToScreenProps = {
-    screen: keyof RootStackProps;
-    params?: any;
+type GoToScreenProps<T extends keyof RootStackParamList> = {
+    screen: T;
+    params?: RootStackParamList[T];
     children: React.ReactNode;
     className?: string;
 };
 
-export default function GoToScreen({ screen, params, children, className }: GoToScreenProps) {
-    const navigation = useNavigation<any>();
+export default function GoToScreen<T extends keyof RootStackParamList>({ screen, params, children, className }: GoToScreenProps<T>) {
+    const navigation = useNavigation<RootStackNavigationProp>();
 
     function handlePress() {
-        console.log("🚀 [NAVIGATE]", { screen, params });
-
-        navigation.getParent()?.navigate(screen, params);
+        Logger.info('Navigation', 'Navigate', { screen, params });
+        navigation.getParent()?.navigate(screen as any, params as any);
     }
 
     return (

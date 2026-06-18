@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Pressable, ScrollView, ActivityIndicator, Alert } from "react-native";
+import { View, Text, Pressable, ScrollView, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Logger } from "@libs/infrastructure/logger/Logger";
+import { Input } from "../../../shared/components/input/Input";
+import { Button } from "../../../shared/components/button/Button";
 
 import { RadioOption } from "src/presentation/debug/components/Radio";
 import { Section } from "src/presentation/debug/components/Section";
@@ -65,7 +68,7 @@ export default function FeedbackForm() {
             timestamp: new Date().toISOString(),
         };
 
-        console.log(finalPayload);
+        Logger.info('FeedbackForm', 'Enviando feedback', finalPayload);
 
         setTimeout(() => {
             setLoading(false);
@@ -75,10 +78,6 @@ export default function FeedbackForm() {
             );
         }, 1200);
     };
-
-    const inputStyle = (field: string) =>
-        `bg-zinc-800 text-white rounded-xl px-4 py-4 border text-base ${errors[field] ? "border-red-500" : "border-zinc-700"
-        }`;
 
     const errorText = (field: string) =>
         errors[field] ? (
@@ -104,26 +103,22 @@ export default function FeedbackForm() {
                 </View>
 
                 <Section number="1" title="Nome">
-                    <TextInput
+                    <Input
                         value={name}
                         onChangeText={setName}
                         placeholder="Digite seu nome completo"
-                        placeholderTextColor="#71717a"
-                        className={inputStyle("name")}
+                        error={errors.name}
                     />
-                    {errorText("name")}
                 </Section>
 
                 <Section number="2" title="E-mail (opcional)">
-                    <TextInput
+                    <Input
                         value={email}
                         onChangeText={setEmail}
                         placeholder="seu@email.com"
-                        placeholderTextColor="#71717a"
                         keyboardType="email-address"
-                        className={inputStyle("email")}
+                        error={errors.email}
                     />
-                    {errorText("email")}
                 </Section>
 
                 <Section number="3" title="Você achou o app útil?">
@@ -139,13 +134,12 @@ export default function FeedbackForm() {
                     </View>
                     {errorText("useful")}
 
-                    <TextInput
+                    <Input
                         value={usefulExplain}
                         onChangeText={setUsefulExplain}
                         placeholder="Explique brevemente..."
-                        placeholderTextColor="#71717a"
                         multiline
-                        className={`${inputStyle("usefulExplain")} mt-4 min-h-[100px]`}
+                        error={errors.usefulExplain}
                     />
                 </Section>
 
@@ -199,15 +193,13 @@ export default function FeedbackForm() {
                 </Section>
 
                 <Section number="6" title="Que melhorias você sugere para o app?">
-                    <TextInput
+                    <Input
                         value={improvements}
                         onChangeText={setImprovements}
                         placeholder="Sugestões de melhorias..."
-                        placeholderTextColor="#71717a"
                         multiline
-                        className={`${inputStyle("improvements")} min-h-[120px]`}
+                        error={errors.improvements}
                     />
-                    {errorText("improvements")}
                 </Section>
 
                 <Section
@@ -226,30 +218,21 @@ export default function FeedbackForm() {
                     </View>
                     {errorText("fulfills")}
 
-                    <TextInput
+                    <Input
                         value={fulfillsExplain}
                         onChangeText={setFulfillsExplain}
                         placeholder="Explique sua resposta..."
-                        placeholderTextColor="#71717a"
                         multiline
-                        className={`${inputStyle("fulfillsExplain")} mt-4 min-h-[100px]`}
+                        error={errors.fulfillsExplain}
                     />
                 </Section>
 
-                <Pressable
+                <Button
+                    title="Confirmar Feedback"
                     onPress={handleSubmit}
-                    disabled={loading}
-                    className="rounded-2xl py-5 items-center shadow-lg"
-                    style={{ backgroundColor: loading ? "#3f3f46" : "#10b981" }}
-                >
-                    {loading ? (
-                        <ActivityIndicator color="#fff" />
-                    ) : (
-                        <Text className="text-white font-bold text-lg tracking-wide">
-                            Confirmar Feedback
-                        </Text>
-                    )}
-                </Pressable>
+                    loading={loading}
+                    className="mt-6"
+                />
             </ScrollView>
         </SafeAreaView>
     );

@@ -6,6 +6,7 @@ import NetInfo from "@react-native-community/netinfo";
 import DeviceInfo from "react-native-device-info";
 import { Platform } from "react-native";
 import { CircleCheck, CircleX, WifiOff } from "lucide-react-native";
+import { Logger } from "../../../libs/infrastructure/logger/Logger";
 
 interface DeviceData {
     deviceId: string;
@@ -46,11 +47,11 @@ export default function Firebase() {
         return Date.now() - start;
     };
 
-    const retryWithBackoff = async (
-        fn: () => Promise<any>,
+    const retryWithBackoff = async <T,>(
+        fn: () => Promise<T>,
         maxRetries = 5,
         initialDelay = 1000
-    ): Promise<any> => {
+    ): Promise<T> => {
         let delay = initialDelay;
 
         for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -117,7 +118,7 @@ export default function Firebase() {
             setData(payload);
             setStatus("success");
         } catch (error) {
-            console.error(error);
+            Logger.error('Firebase', 'Erro ao coletar ou enviar dados', error);
             setStatus("error");
         } finally {
             setLoading(false);
