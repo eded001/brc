@@ -24,7 +24,7 @@ export function usePrivateChat(chatId: string, userId: string | undefined) {
             .orderBy('createdAt', 'asc')
             .onSnapshot(
                 snapshot => {
-                    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as ChatMessage));
                     setMessages(data);
                     setLoading(false);
                 },

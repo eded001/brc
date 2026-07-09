@@ -19,7 +19,9 @@ import PrivateChatScreen from "@screens/chats/views/PrivateChatScreen";
 // navigation
 import AppTabs from "./AppTabs";
 
-const Stack = createNativeStackNavigator();
+import { RootStackParamList } from "@navigation/types";
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 
 

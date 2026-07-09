@@ -19,7 +19,7 @@ async function getOrCreateDeviceId(): Promise<string> {
 }
 
 function AppContent() {
-  const navigation = useNavigation();
+  const navigation = useNavigation<any>();
 
   usePushNotifications(
     async (token) => {
@@ -35,7 +35,7 @@ function AppContent() {
       );
     },
     (screen, params) => {
-      navigation.navigate(screen as never, params as never);
+      navigation.navigate(screen, params);
     },
   );
 

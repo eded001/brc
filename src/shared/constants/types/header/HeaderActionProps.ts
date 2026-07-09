@@ -1,7 +1,7 @@
-import { RootStackProps } from "@navigation/types/rootStack/RootStackProps";
+import { RootStackParamList } from "@navigation/types";
 
 export type HeaderActionProps = {
-    screen: keyof RootStackProps;
+    screen: keyof RootStackParamList;
     icon: React.ComponentType<{ size?: number; color?: string }>;
     size?: number;
     color?: string;

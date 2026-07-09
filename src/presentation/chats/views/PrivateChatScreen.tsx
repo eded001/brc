@@ -15,13 +15,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import auth from '@react-native-firebase/auth';
 import { usePrivateChat } from '@libs/application/chats/usePrivateChat';
-import { PrivateChatScreenProps } from '../../../../app/navigation/types';
+import { PrivateChatScreenProps } from '@navigation/types';
 import { Logger } from '../../../libs/infrastructure/logger/Logger';
 import { Avatar } from '../../../shared/components/avatar/Avatar';
 
 // ─── Bubble ───────────────────────────────────────────
 
-const MessageBubble = ({ item, isOwn }) => {
+const MessageBubble = ({ item, isOwn }: { item: any; isOwn: boolean }) => {
   return (
     <View
       className={`mx-3 mb-3 max-w-[75%] ${isOwn ? 'self-end' : 'self-start'}`}
@@ -58,7 +58,7 @@ export default function PrivateChatScreen({ route }: PrivateChatScreenProps) {
   const userId = currentUser?.uid;
 
   const [input, setInput] = useState('');
-  const listRef = useRef(null);
+  const listRef = useRef<any>(null);
 
   const { messages, loading, sendMessage } = usePrivateChat(chatId, userId);
 

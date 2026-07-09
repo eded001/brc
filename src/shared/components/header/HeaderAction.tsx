@@ -4,7 +4,7 @@ import React from "react";
 import { GoToScreen } from "@/components/go-to-screen";
 
 // types
-import { HeaderActionProps } from "@navigation/types/header";
+import { HeaderActionProps } from "@/constants/types/header/HeaderActionProps";
 
 export default function HeaderAction({
     screen,

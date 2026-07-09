@@ -7,9 +7,9 @@ import { Logger } from "../../../libs/infrastructure/logger/Logger";
 
 export default function ProfileScreen() {
     const [loading, setLoading] = useState(true);
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState<any>(null);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
 
     useEffect(() => {
         async function loadUser() {

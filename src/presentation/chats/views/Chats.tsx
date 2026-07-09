@@ -19,13 +19,13 @@ import { Button } from "../../../shared/components/button/Button";
 
 // ─── Utils ─────────────────────────
 
-function generateChatId(userA, userB) {
+function generateChatId(userA: string, userB: string) {
     return [userA, userB].sort().join("_");
 }
 
 // ─── UI Components ──────────────────
 
-function PendingItem({ item, onAccept, onReject }) {
+function PendingItem({ item, onAccept, onReject }: { item: any; onAccept: (item: any) => void; onReject: (id: string) => void }) {
     return (
         <View className="bg-card border border-border rounded-2xl p-4 mb-3 mx-3">
             <View className="flex-row items-center mb-3 gap-2">
@@ -54,11 +54,11 @@ function PendingItem({ item, onAccept, onReject }) {
     );
 }
 
-function HistoryItem({ item }) {
+function HistoryItem({ item }: { item: any }) {
     const isAccepted = item.status === "accepted";
 
     const currentUser = auth().currentUser;
-    const userId = currentUser?.uid;
+    const userId = currentUser?.uid || "";
 
     const otherUserId =
         item.fromUserId === userId
@@ -135,8 +135,8 @@ export default function InviteScreen() {
                     { type: "history" },
                     ...historyInvites
                 ]}
-                keyExtractor={(item, index) => item.id || item.type + index}
-                renderItem={({ item }) => {
+                keyExtractor={(item: any, index) => item.id || item.type + String(index)}
+                renderItem={({ item }: { item: any }) => {
                     if (item.type === "pending") {
                         return <Text className="text-muted text-xs px-4 mt-4 mb-2">Pendentes</Text>;
                     }

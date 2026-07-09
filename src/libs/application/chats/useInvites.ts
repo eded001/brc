@@ -37,7 +37,7 @@ export function useInvites() {
             .where("toUserId", "==", userId)
             .where("status", "==", "pending")
             .onSnapshot(snap => {
-                const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as InviteData));
                 setPendingInvites(data);
             }, err => {
                 Logger.error('useInvites', 'Falha ao buscar convites pendentes', err);
@@ -54,7 +54,7 @@ export function useInvites() {
             .where("toUserId", "==", userId)
             .where("status", "in", ["accepted", "rejected"])
             .onSnapshot(snap => {
-                const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                const data = snap.docs.map(doc => ({ id: doc.id, ...doc.data() } as InviteData));
                 setHistoryInvites(data);
             }, err => {
                 Logger.error('useInvites', 'Falha ao buscar histórico de convites', err);

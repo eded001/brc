@@ -45,7 +45,7 @@ async function displayLocalNotification(
         },
         ios: {
             sound: 'default',
-            badge: 1,
+            badgeCount: 1,
         },
     });
 }

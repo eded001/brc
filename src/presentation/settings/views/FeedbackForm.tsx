@@ -89,7 +89,7 @@ export default function FeedbackForm() {
     return (
         <SafeAreaView className="flex-1 bg-zinc-950">
             <ScrollView
-                contentContainerStyle={{ padding: 20, paddingBottom: 60 }}
+                contentContainerClassName="p-5 pb-15"
                 showsVerticalScrollIndicator={false}
             >
                 <View className="mb-10">

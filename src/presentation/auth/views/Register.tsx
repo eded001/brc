@@ -3,7 +3,7 @@ import { View, Text, FlatList, TouchableOpacity, Dimensions, ScrollView } from "
 import { useNavigation } from "@react-navigation/native";
 import { Input } from "../../../shared/components/input/Input";
 import { Button } from "../../../shared/components/button/Button";
-import { RootStackNavigationProp } from "../../../../app/navigation/types";
+import { RootStackNavigationProp } from "@navigation/types";
 import { User, Mail, Lock } from "lucide-react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 

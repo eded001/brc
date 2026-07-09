@@ -9,8 +9,15 @@ import { Logger } from "../../../libs/infrastructure/logger/Logger";
 import { Input } from "../../../shared/components/input/Input";
 import { Button } from "../../../shared/components/button/Button";
 
+interface Activity {
+    id: string;
+    person: string;
+    task: string;
+    datetime: Date;
+}
+
 export default function Events() {
-    const [userId, setUserId] = useState(null);
+    const [userId, setUserId] = useState<string | null>(null);
 
     useEffect(() => {
         auth().onAuthStateChanged(user => {
@@ -35,8 +42,8 @@ export default function Events() {
     const [showEndPicker, setShowEndPicker] = useState(false);
 
     // atividades
-    const [activities, setActivities] = useState([]);
-    const [selectedActivityId, setSelectedActivityId] = useState(null);
+    const [activities, setActivities] = useState<Activity[]>([]);
+    const [selectedActivityId, setSelectedActivityId] = useState<string | null>(null);
 
     // modal
     const [modalVisible, setModalVisible] = useState(false);

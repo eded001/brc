@@ -130,7 +130,7 @@ const BtnPrimary = ({
     onPress,
 }: {
     label: string;
-    onPress: () => void;
+    onPress?: () => void;
 }) => {
     const scale = useRef(new Animated.Value(1)).current;
 
@@ -179,7 +179,7 @@ const BtnSecondary = ({
     onPress,
 }: {
     label: string;
-    onPress: () => void;
+    onPress?: () => void;
 }) => {
     const scale = useRef(new Animated.Value(1)).current;
 

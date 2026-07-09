@@ -13,3 +13,9 @@ Este documento serve como um modelo crítico e dinâmico, projetado para fornece
 Este documento apresenta um guia detalhado e estruturado para a configuração do ambiente de desenvolvimento do projeto. Ele serve como referência confiável para garantir que todos os colaboradores possam replicar de maneira consistente o ambiente necessário para execução, build e testes da aplicação, minimizando falhas decorrentes de divergências de versões ou configurações.
 
 [Link para o documento](./INSTALL.md)
+
+## Roadmap do MVP
+
+Este documento estabelece o planejamento estratégico e técnico para a construção do Produto Mínimo Viável (MVP) do projeto, descrevendo as etapas de execução, priorização e boas práticas.
+
+[Link para o documento](./MVP_ROADMAP.md)

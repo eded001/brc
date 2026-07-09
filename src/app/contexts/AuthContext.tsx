@@ -1,10 +1,18 @@
 import React, { createContext, useEffect, useState } from 'react';
 import * as authService from '@libs/domain/auth/src/service';
 
-export const AuthContext = createContext({});
+export interface AuthContextType {
+    user: any;
+    loading: boolean;
+    signIn: typeof authService.signIn;
+    signUp: typeof authService.signUp;
+    signOut: typeof authService.signOut;
+}
+
+export const AuthContext = createContext<AuthContextType>({} as AuthContextType);
 
 export function AuthProvider({ children } : { children: React.ReactNode }) {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState<any>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

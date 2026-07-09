@@ -2,7 +2,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Logger } from "../../../libs/infrastructure/logger/Logger";
-import { RootStackParamList, RootStackNavigationProp } from "../../../../app/navigation/types";
+import { RootStackParamList, RootStackNavigationProp } from "@navigation/types";
 
 type GoToScreenProps<T extends keyof RootStackParamList> = {
     screen: T;

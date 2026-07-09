@@ -6,12 +6,12 @@ import { useAuth } from "@libs/application/auth/useAuth";
 // components
 import { Logger } from "../../../libs/infrastructure/logger/Logger";
 import { GoToScreen } from '@/components/go-to-screen';
+import { RootStackParamList } from "@navigation/types";
 
 // Routes
-const screens = [
+const screens: { name: keyof RootStackParamList; label: string }[] = [
     { name: 'Register', label: 'Register' },
     { name: 'Firebase', label: 'Firebase' },
-    { name: 'Oauth', label: 'Oauth' },
     { name: 'RBAC', label: 'RBAC' },
     { name: 'Invite', label: 'Invite' },
 ];

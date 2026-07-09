@@ -13,7 +13,7 @@ export default function Auth() {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
 
     async function signInWithEmail() {
         setLoading(true);

@@ -128,7 +128,7 @@ export default function Firebase() {
 
     return (
         <SafeAreaView className="flex-1 bg-zinc-950">
-            <ScrollView contentContainerStyle={{ padding: 20 }}>
+            <ScrollView contentContainerClassName="p-5">
                 <Text className="text-3xl font-bold text-white mb-6">
                     Firebase Diagnostics
                 </Text>
